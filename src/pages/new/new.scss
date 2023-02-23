@@ -21,11 +21,11 @@
       .left {
         flex: 1;
         text-align: center;
-
+        padding-top: 50px;
         img {
           width: 100px;
           height: 100px;
-          border-radius: 50%;
+          // border-radius: 50%;
           object-fit: cover;
         }
       }

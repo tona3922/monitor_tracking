@@ -2,6 +2,7 @@ import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import addimage from "../../image/add-photo.png";
 import { useState } from "react";
 
 const New = ({ inputs, title }) => {
@@ -17,20 +18,14 @@ const New = ({ inputs, title }) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
+            <img src={file ? URL.createObjectURL(file) : addimage} alt="" />
           </div>
           <div className="right">
             <form>
               <div className="formInput">
                 <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                  Profile image :{" "}
+                  <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
                 <input
                   type="file"
