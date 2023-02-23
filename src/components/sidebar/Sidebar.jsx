@@ -21,7 +21,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         {/* <Link to="/" style={{ textDecoration: "none" }}> */}
-        <span className="logo">lamadmin</span>
+        <span className="logo">Monitor Tracking</span>
         {/* </Link> */}
       </div>
       <hr />
@@ -34,7 +34,7 @@ const Sidebar = () => {
               <span>Dashboard</span>
             </li>
           </Link>
-          <p className="title">LISTS</p>
+          {/* <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
@@ -46,16 +46,16 @@ const Sidebar = () => {
               <StoreIcon className="icon" />
               <span>Products</span>
             </li>
-          </Link>
-          <li>
+          </Link> */}
+          {/* <li>
             <CreditCardIcon className="icon" />
             <span>Orders</span>
           </li>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
-          </li>
-          <p className="title">USEFUL</p>
+          </li> */}
+          <p className="title">WHAT'S GOING ON</p>
           <li>
             <InsertChartIcon className="icon" />
             <span>Stats</span>
@@ -67,11 +67,11 @@ const Sidebar = () => {
           <p className="title">SERVICE</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
+            <span>System Check</span>
           </li>
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
+            <span>Mindset</span>
           </li>
           <li>
             <SettingsApplicationsIcon className="icon" />
