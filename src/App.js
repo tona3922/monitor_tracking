@@ -9,7 +9,7 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 
-function App() {
+export default function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+
