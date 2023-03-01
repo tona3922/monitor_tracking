@@ -5,15 +5,15 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
-import "./style/dark.scss";
-import { useContext } from "react";
-import { DarkModeContext } from "./context/darkModeContext";
+// import "./style/dark.scss";
+// import { useContext } from "react";
+// import { DarkModeContext } from "./context/darkModeContext";
 
-function App() {
-  const { darkMode } = useContext(DarkModeContext);
+export default function App() {
+  // const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={"app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+
