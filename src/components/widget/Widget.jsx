@@ -3,7 +3,7 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-import "./widget.scss";
+// import "./widget.scss";
 
 
 const Widget = ({ type, tempValue, humidValue }) => {
