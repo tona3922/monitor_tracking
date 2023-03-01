@@ -3,7 +3,7 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-// import "./widget.scss";
+import "./widget.scss";
 
 
 const Widget = ({ type, tempValue, humidValue }) => {
@@ -78,9 +78,9 @@ const Widget = ({ type, tempValue, humidValue }) => {
   }
 
   return (
-    <div className="widget bg-slate-300">
+    <div className="widget">
       <div className="left">
-        <span className="text-[red] text-[40px]">{data.title}</span>
+        <span className="text-[red]">{data.title}</span>
         <span className="counter">  
          {data.value}
         </span>
