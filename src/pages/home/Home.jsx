@@ -6,7 +6,7 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
-
+import Header from "../../components/header/header";
 
 const Home = () => {
   const [sensorData, setSensorData] = useState([{}]);
@@ -19,26 +19,27 @@ const Home = () => {
   return (
     <div className="home">
       <Sidebar />
-      <div className="homeContainer">
+      <Header />
+      {/* <div className="homeContainer"> */}
         {/* <Navbar /> */}
-        <div className="widgets">
-          <Widget type="temp" tempValue={sensorData[sensorData.length-1].tempValue}/>
-          <Widget type="humid" humidValue={sensorData[sensorData.length-1].humidValue}/>
-          <Widget type="air" />
-          <Widget type="humidifier" />
-        </div>
-        <div className="charts">
-          <Featured />
-          <Chart 
-              title="Last 12 Months (Revenue)" 
-              aspect={2 / 1} 
-              childToParent= {childToParent}/>
-        </div>
-        <div className="listContainer">
-          <div className="listTitle text-[red]">Latest Transactions</div>
-          <Table />
-        </div>
-      </div>
+          {/* <div className="widgets">
+            <Widget type="temp" tempValue={sensorData[sensorData.length-1].tempValue}/>
+            <Widget type="humid" humidValue={sensorData[sensorData.length-1].humidValue}/>
+            <Widget type="air" />
+            <Widget type="humidifier" />
+          </div>
+          <div className="charts">
+            <Featured />
+            <Chart 
+                title="Last 12 Months (Revenue)" 
+                aspect={2 / 1} 
+                childToParent= {childToParent}/>
+          </div>
+          <div className="listContainer">
+            <div className="listTitle text-[red]">Latest Transactions</div>
+            <Table />
+          </div> */}
+      {/* </div> */}
     </div>
   );
 };
