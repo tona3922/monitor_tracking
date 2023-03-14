@@ -35,11 +35,10 @@ export default function App() {
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
+            <Route path="/nav2" element={<Home />} />
           </Route>
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
-
-
