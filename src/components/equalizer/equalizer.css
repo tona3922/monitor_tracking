@@ -1,0 +1,33 @@
+.equalizer-container {
+    aspect-ratio : 1 / 1;
+    background-color: #252525;
+    border-radius: 20px;
+    color: #FFFFFF;
+    width: 20%;
+    min-width: 200px;
+    align-self: center;
+    font-family: 'Inter';
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+.value-display-text {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 3.2vw;
+    line-height: 48px;
+    text-align: center;
+    padding-top: 30px;
+    /* Main Color/1 */
+    background: linear-gradient(225deg, #EDBAFF 0%, #A1FFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* text-fill-color: transparent; */
+}
+.tab-tile-text {
+    text-align: center;
+    font-size: 1.5vw;
+    color: #7A7A7A;
+    padding-bottom: 10px;
+}
