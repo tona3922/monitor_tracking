@@ -1,16 +1,12 @@
-import mysql from "mysql2/promise";
+import mongoose from 'mongoose'
 
-const connection = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "Kazuha@4302$",
-    database: "as_bookstore",
-});
+const mongooseConnect = async (url) => {
+    mongoose.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+        .then(() => console.log('Connected'))
+        .catch((err) => console.log(`Error connecting to database: ${err}`));
+}
 
-// connection.query('SELECT * FROM tbl_book;', (err, result, fields) => {
-//     console.log(err)
-//     console.log(result)
-//     // console.log(fields)
-// })
-
-export default connection;
+export default mongooseConnect

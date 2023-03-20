@@ -4,6 +4,6 @@ import express from "express"
 var sensorRouter = express.Router()
 
 sensorRouter
-    .route('/').get(SensorController.tf)
+    .route('/').get(SensorController.testing)
 
 export default sensorRouter
