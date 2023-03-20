@@ -3,13 +3,16 @@
     background-color: #252525;
     border-radius: 20px;
     color: #FFFFFF;
-    width: 20%;
-    min-width: 200px;
+    width: 346px;
     align-self: center;
     font-family: 'Inter';
-    margin: 50px auto;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
+    margin-left: 40px;
+    /* padding: 20px 0; */
+    -webkit-box-shadow: -2px 3px 3px 0px rgba(0,0,0,0.5); 
+    box-shadow: -2px 3px 3px 0px rgba(0,0,0,0.5);
 }
 .value-display-text {
     font-style: normal;
@@ -27,7 +30,8 @@
 }
 .tab-tile-text {
     text-align: center;
+    font-weight: 700;
     font-size: 1.5vw;
-    color: #7A7A7A;
+    color:  whitesmoke;
     padding-bottom: 10px;
 }

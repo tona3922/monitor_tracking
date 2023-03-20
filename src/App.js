@@ -13,7 +13,7 @@ export default function App() {
   // const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={"app"}>
+    <div className="app">
       <BrowserRouter>
         <Routes>
           <Route path="/">

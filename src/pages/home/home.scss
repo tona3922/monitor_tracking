@@ -1,9 +1,9 @@
 .home {
   display: flex;
-
   .homeContainer {
+    --tw-bg-opacity: 1;
+    background-color: rgb(49 49 64 / var(--tw-bg-opacity));
     flex: 6;
-
     .widgets,
     .charts {
       display: flex;

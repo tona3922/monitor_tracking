@@ -10,9 +10,9 @@ const Navbar = () => {
     <div className="navbar">
       <div className="wrapper">
         <div className="left">
-          <div className="item">DashBoard</div>
+          <h1 className="text-white-primary font-semibold text-[28px]">Dashboard</h1>
           <div className="item">
-            <input placeholder="search here" />
+            <input placeholder="search" className="rounded-[10px] px-[10px]"/>
             <SearchIcon className="icon" />
           </div>
         </div>
