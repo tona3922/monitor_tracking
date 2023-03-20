@@ -1,0 +1,35 @@
+.tab {
+  padding-top: 20px;
+  display: flex;
+  padding-left: 10%;
+  padding-right: 10%;
+  nav {
+    flex: 5;
+    padding-left: 20%;
+    padding-right: 20%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    //   display: flex;
+    //   justify-content: center;
+    .navdiv {
+      //   margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      background-color: rgb(215, 215, 215);
+      color: rgb(71, 71, 71);
+      width: 80px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 10px;
+      //   text-align: center;
+      //   padding-top: ;
+    }
+  }
+  button {
+    flex: 1;
+    background-color: black;
+    border-radius: 10px;
+    color: whitesmoke;
+  }
+}

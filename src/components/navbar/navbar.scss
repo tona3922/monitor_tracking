@@ -1,0 +1,94 @@
+.navbar {
+  height: 80px;
+  border-bottom: 0.5px solid rgb(231, 228, 228);
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+
+  .wrapper {
+    width: 100%;
+    // padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    // gap: 100px;
+    .left {
+      display: flex;
+      justify-content: space-between;
+      gap: 60px;
+      .item {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        position: relative;
+        font-size: 20px;
+        width: fit-content;
+        border-radius: 10px;
+        background-color: aliceblue;
+        input {
+          height: 30px;
+          width: 300px;
+          font-size: 16px;
+          outline: none;
+          background-color: aliceblue;
+          // border-bottom: 0.5px solid grey;
+        }
+        .icon {
+          // background-color: aliceblue;
+          padding-right: 5px;
+          font-size: 30px;
+          cursor: pointer;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      .item {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        position: relative;
+        font-size: 20px;
+        input {
+          // background-color: rgb(181, 181, 181);
+          height: 30px;
+          width: 200px;
+          font-size: 20px;
+          outline: none;
+          border-bottom: 0.5px solid grey;
+        }
+        .icon {
+          font-size: 30px;
+          cursor: pointer;
+          color: white;
+        }
+
+        .avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+      }
+    }
+    // .search {
+    //   display: flex;
+    //   align-items: center;
+    //   border: 0.5px solid lightgray;
+    //   padding: 3px;
+
+    //   input {
+    //     border: none;
+    //     outline: none;
+    //     background: transparent;
+
+    //     &::placeholder {
+    //       font-size: 12px;
+    //     }
+    //   }
+    // }
+  }
+}
