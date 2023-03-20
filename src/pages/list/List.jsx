@@ -5,7 +5,7 @@ import Datatable from "../../components/datatable/Datatable"
 
 const List = () => {
   return (
-    <div className="list">
+    <div className="list flex-initial">
       <Sidebar/>
       <div className="listContainer">
         <Navbar/>

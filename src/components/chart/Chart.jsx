@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./chart.scss";
 import {
-  AreaChart,
-  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,25 +12,25 @@ import {
   Line,
 } from "recharts";
 
-const data = [
-  { name: "Jan", Total: 1200 },
-  { name: "Feb", Total: 2100 },
-  { name: "Mar", Total: 800 },
-  { name: "Apr", Total: 1600 },
-  { name: "May", Total: 900 },
-  { name: "June", Total: 1700 },
-  { name: "July", Total: 1900 },
-  { name: "Aug", Total: 1700 },
-  { name: "Sep", Total: 2700 },
-  { name: "Oct", Total: 2860 },
-  { name: "Nov", Total: 2400 },
-  { name: "Dec", Total: 3000 },
-];
+// const data = [
+//   { name: "Jan", Total: 1200 },
+//   { name: "Feb", Total: 2100 },
+//   { name: "Mar", Total: 800 },
+//   { name: "Apr", Total: 1600 },
+//   { name: "May", Total: 900 },
+//   { name: "June", Total: 1700 },
+//   { name: "July", Total: 1900 },
+//   { name: "Aug", Total: 1700 },
+//   { name: "Sep", Total: 2700 },
+//   { name: "Oct", Total: 2860 },
+//   { name: "Nov", Total: 2400 },
+//   { name: "Dec", Total: 3000 },
+// ];
 // console.log(data)
 
-const Chart = ({ aspect, title, childToParent }) => {
-  // const [temp, setTemp] = useState([{}]);
+const Chart = ({ aspect, title, getTab }) => {
   const [sensorData, setSensorData] = useState([{}]);
+  console.log(getTab)
   useEffect(() => {
     async function fetchData() {
       const response1 = await axios.get(
@@ -57,40 +55,44 @@ const Chart = ({ aspect, title, childToParent }) => {
           };
         })
       );
-
       })
-      childToParent(sensorData);
       // console.log(sensorData);
 
     },[sensorData]);
 
   return (
-    <div className="chart">
+    <div className="chart w-[800px] px-[10px] mr-[20px]">
       <div className="title">{title}</div>
       <ResponsiveContainer width="100%" aspect={aspect}>
         <LineChart
-          width={730}
-          height={250}
+          width={700}
+          height={400}
           data={sensorData}
-          margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
+          margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis type="number" domain={[0, 100]}/>
           <Tooltip />
           <Legend />
-          <Line
+          {
+            getTab ? 
+            <Line
             type="monotone"
             dataKey="humidValue"
             name="Humidity"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />
+          :
           <Line 
             type="monotone" 
             dataKey="tempValue" 
             name="Temperature"
-            stroke="#82ca9d" />
+            stroke="#82ca9d" 
+            // activeDot={{ r: 8 }}
+            />
+          }
         </LineChart>
       </ResponsiveContainer>
     </div>

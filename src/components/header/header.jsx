@@ -1,9 +1,9 @@
 const Header = () => {
   return (
-    <div className="h-[100px] flex-initial w-screen border-b-2 border-[#e6e3e3]">
-      <div className="flex m-[25px] bg-[red] justify-between">
+    <div className="h-[100px] flex-initial border-b-2 border-[#e6e3e3] bg-theme">
+      <div className="flex m-[25px] justify-between">
         <div className="flex items-center">
-          <h1 className="font-semibold text-[28px]">Dashboard</h1>
+          <h1 className="font-semibold text-[28px] text-white-primary">Dashboard</h1>
           <input></input>
         </div>
         <div className="flex ">

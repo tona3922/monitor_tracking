@@ -9,7 +9,11 @@ module.exports = {
   ],
   theme: {
     colors:{
-      "white-primary": "#fcfcfc"
+      "white-primary": "#fcfcfc",
+      "status-off": "#46475E",
+      "status-on": "#2E2E3E",
+      "theme": "#313140",
+      "green-primary":"#27D71C"
     },
     extend: {
       

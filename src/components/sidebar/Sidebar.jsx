@@ -1,4 +1,3 @@
-import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -11,55 +10,85 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
+import { Link, NavLink  } from "react-router-dom";
+import { useState } from "react";
+import "./sidebar.scss";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
 const Sidebar = () => {
-  // const { dispatch } = useContext(DarkModeContext);
+
+  const [activeTab, setActiveTab] = useState("");
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+  console.log(activeTab);
+
   return (
     <div className="sidebar">
       <div className="top">
         {/* <Link to="/" style={{ textDecoration: "none" }}> */}
-        <span className="logo">Monitor Tracking</span>
+        <svg
+          width="38"
+          height="32"
+          viewBox="0 0 38 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_1601_734)">
+            <path
+              d="M16.6255 0.30188L37.1375 20.7309V31.6981H27.5652V24.6734L12.6671 9.83541H9.57228V31.6981H0V0.30188H16.6255ZM27.5652 11.1974V0.30188H37.1375V11.1974H27.5652Z"
+              fill="url(#paint0_linear_1601_734)"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_1601_734"
+              x1="37.1375"
+              y1="0.30188"
+              x2="6.17891"
+              y2="36.9218"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#EDBAFF" />
+              <stop offset="1" stop-color="#A1FFFF" />
+            </linearGradient>
+            <clipPath id="clip0_1601_734">
+              <rect width="37.8182" height="32" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+
+        <p className="text-[15px] font-bold ml-[5px] leading-tight text-white-primary">
+          Warehouse <br /> Tracking
+        </p>
         {/* </Link> */}
       </div>
       <hr />
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li>
+          <Link to="/">
+            <li
+              onClick={() => handleTabClick("")}
+              className={activeTab === "" ? "active" : ""}
+            >
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </li>
           </Link>
-          {/* <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
-            <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+
+          <p className="title">WHAT'S GOING ON</p>
+          <Link to="/products">
+            <li
+              onClick={() => handleTabClick("products")}
+              className={activeTab === "products" ? "active" : ""}
+            >
+              <InsertChartIcon className="icon" />
+              <span>Stats</span>
             </li>
           </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Products</span>
-            </li>
-          </Link> */}
-          {/* <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li> */}
-          <p className="title">WHAT'S GOING ON</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
-          </li>
           <li>
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
@@ -88,16 +117,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      {/* <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
-      </div> */}
     </div>
   );
 };
