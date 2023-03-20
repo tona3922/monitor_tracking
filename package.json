@@ -6,7 +6,7 @@
     "@craco/craco": "^7.0.0",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.4.4",
+    "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.4.4",
     "@mui/styles": "^5.11.13",
     "@mui/x-data-grid": "^5.5.1",

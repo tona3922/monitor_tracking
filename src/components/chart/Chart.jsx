@@ -30,7 +30,7 @@ import {
 
 const Chart = ({ aspect, title, getTab }) => {
   const [sensorData, setSensorData] = useState([{}]);
-  console.log(getTab)
+  console.log(getTab);
   useEffect(() => {
     async function fetchData() {
       const response1 = await axios.get(
@@ -47,7 +47,7 @@ const Chart = ({ aspect, title, getTab }) => {
     }
     fetchData().then(([ob1, ob2]) => {
       setSensorData(
-        ob1.map((item,index) => {
+        ob1.map((item, index) => {
           return {
             humidValue: item.value,
             tempValue: ob2[index].value,
@@ -55,10 +55,9 @@ const Chart = ({ aspect, title, getTab }) => {
           };
         })
       );
-      })
-      // console.log(sensorData);
-
-    },[sensorData]);
+    });
+    // console.log(sensorData);
+  }, [sensorData]);
 
   return (
     <div className="chart w-[800px] px-[10px] mr-[20px]">
@@ -70,29 +69,33 @@ const Chart = ({ aspect, title, getTab }) => {
           data={sensorData}
           margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis type="number" domain={[0, 100]}/>
+          <CartesianGrid strokeDasharray="3 3" stroke="white" />
+          <XAxis dataKey="date" stroke="white" />
+          <YAxis
+            type="number"
+            domain={[0, 100]}
+            stroke="white"
+            // label={{ value: "domain", fill: "white" }}
+          />
           <Tooltip />
           <Legend />
-          {
-            getTab ? 
+          {getTab ? (
             <Line
-            type="monotone"
-            dataKey="humidValue"
-            name="Humidity"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          :
-          <Line 
-            type="monotone" 
-            dataKey="tempValue" 
-            name="Temperature"
-            stroke="#82ca9d" 
-            // activeDot={{ r: 8 }}
+              type="monotone"
+              dataKey="humidValue"
+              name="Humidity"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
             />
-          }
+          ) : (
+            <Line
+              type="monotone"
+              dataKey="tempValue"
+              name="Temperature"
+              stroke="#38b000"
+              // activeDot={{ r: 8 }}
+            />
+          )}
         </LineChart>
       </ResponsiveContainer>
     </div>
