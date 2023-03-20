@@ -1,6 +1,6 @@
 import { AccountModel } from "../model/account_model.js";
 
-export default new (class SensorController {
+export default new (class AccountController {
     login = async (req, res) => {
         var email = req.body.email
         var password = req.body.password

@@ -13,6 +13,11 @@ const port = 8080
 app.use(cors());
 app.use(bodyParser.json())
 
+// Some decypher for POST method
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 mongoConnect(process.env.MONGO_URL)
 
 route(app)

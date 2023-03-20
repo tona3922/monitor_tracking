@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const accountDataSchema = new mongoose.Schema({
     email: String,
-    password: Date,
+    password: String,
     thingsboard_JWT: String
 });
 
