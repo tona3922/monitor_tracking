@@ -10,14 +10,13 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link, NavLink  } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./sidebar.scss";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
 const Sidebar = () => {
-
   const [activeTab, setActiveTab] = useState("");
 
   const handleTabClick = (tab) => {
@@ -28,7 +27,6 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        {/* <Link to="/" style={{ textDecoration: "none" }}> */}
         <svg
           width="38"
           height="32"
