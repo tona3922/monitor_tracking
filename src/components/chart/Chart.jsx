@@ -12,89 +12,91 @@ import {
   Line,
 } from "recharts";
 
-// const data = [
-//   { name: "Jan", Total: 1200 },
-//   { name: "Feb", Total: 2100 },
-//   { name: "Mar", Total: 800 },
-//   { name: "Apr", Total: 1600 },
-//   { name: "May", Total: 900 },
-//   { name: "June", Total: 1700 },
-//   { name: "July", Total: 1900 },
-//   { name: "Aug", Total: 1700 },
-//   { name: "Sep", Total: 2700 },
-//   { name: "Oct", Total: 2860 },
-//   { name: "Nov", Total: 2400 },
-//   { name: "Dec", Total: 3000 },
-// ];
-// console.log(data)
-
-const Chart = ({ aspect, title, getTab }) => {
-  const [sensorData, setSensorData] = useState([{}]);
-  console.log(getTab)
+const Chart = ({ aspect, title, getTab, childToParent }) => {
+  const [temp, setTemp] = useState([]);
+  const [humid, setHumid] = useState([]);
+  const timeStart = new Date("2023-03-20T00:00:00Z").getTime().toString();
+  const timeEnd = new Date("2023-03-20T18:00:00Z").getTime().toString();
+  const API_URL = `http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${process.env.REACT_APP_ENITYID}/values/timeseries?keys=TEMPERATURE,HUMIDITY&startTs=${timeStart}&endTs=${timeEnd}&interval=60000&limit=100`;
   useEffect(() => {
     async function fetchData() {
-      const response1 = await axios.get(
-        "https://io.adafruit.com/api/v2/thinhdanghcmut/feeds/cs-ce-dadn.humi-sensor/data"
-      );
-      const object1 = response1.data.reverse();
-
-      const response2 = await axios.get(
-        "https://io.adafruit.com/api/v2/thinhdanghcmut/feeds/cs-ce-dadn.temp-sensor/data"
-      );
-      const object2 = response2.data.reverse();
-
-      return [object1, object2];
-    }
-    fetchData().then(([ob1, ob2]) => {
-      setSensorData(
-        ob1.map((item,index) => {
-          return {
-            humidValue: item.value,
-            tempValue: ob2[index].value,
-            date: new Date(item.created_at),
-          };
+     const response = await axios
+        .get(API_URL, {
+          headers: {
+            "X-Authorization": process.env.REACT_APP_JWT_TOKEN,
+            "Content-Type": "application/json",
+          },
         })
-      );
+        .then((response) => {
+          return response.data
+        })
+        .catch((err) => {
+          console.log(err);
+        }); 
+        return response
+    }
+    const intervalId = setInterval(() => {
+      fetchData().then(data => {
+        // childToParent(data)
+        setTemp(data['TEMPERATURE'].map(item => {
+          return{
+            ...item,
+            ts: new Date(item.ts)
+          }
+        }))
+        setHumid(data['HUMIDITY'].map(item => {
+          return{
+            ...item,
+            ts: new Date(item.ts)
+          }
+        }))
       })
-      // console.log(sensorData);
+    // Call the API every 5 seconds
+    }, 5000);
+    
+    return () => clearInterval(intervalId);
+    
+  }, [temp, humid]);
 
-    },[sensorData]);
 
   return (
     <div className="chart w-[800px] px-[10px] mr-[20px]">
       <div className="title">{title}</div>
-      <ResponsiveContainer width="100%" aspect={aspect}>
+        <div>
         <LineChart
           width={700}
           height={400}
-          data={sensorData}
+          data={getTab ? humid : temp}
           margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis type="number" domain={[0, 100]}/>
+          <CartesianGrid strokeDasharray="3 3" stroke="white" />
+          <XAxis dataKey="ts" />
+          <YAxis
+            type="number"
+            domain={[0, 100]}
+            stroke="white"
+          />
           <Tooltip />
           <Legend />
-          {
-            getTab ? 
+          {getTab ? (
             <Line
-            type="monotone"
-            dataKey="humidValue"
-            name="Humidity"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          :
-          <Line 
-            type="monotone" 
-            dataKey="tempValue" 
-            name="Temperature"
-            stroke="#82ca9d" 
-            // activeDot={{ r: 8 }}
+              type="monotone"
+              dataKey="value"
+              name="Humidity"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
             />
-          }
+          ) : (
+            <Line
+              type="monotone"
+              dataKey="value"
+              name="Temperature"
+              stroke="#38b000"
+              // activeDot={{ r: 8 }}
+            />
+          )}
         </LineChart>
-      </ResponsiveContainer>
+        </div>
     </div>
   );
 };

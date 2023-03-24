@@ -3,8 +3,6 @@ import axios from "axios";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import './equalizer.css';
-// import Sun from './sun.png';
-// import Drop from './drop.png';
 import { withStyles } from '@mui/styles';
 import Slider from '@mui/material/Slider';
 
@@ -25,7 +23,7 @@ export const CustomSlider = withStyles({
 })(Slider);
 
 function TemperatureTab(tempValue) {
-    const [temperature, setTemp] = useState(tempValue.tempValue)
+    const [temperature, setTemp] = useState(tempValue.tempValue === undefined ? 0 : tempValue.tempValue.value)
     const marks = [
         {
           value: 2,
@@ -65,7 +63,8 @@ function TemperatureTab(tempValue) {
 }
 
 function HumidityTab(humidValue) {
-    const [humidity, setHumid] = useState(humidValue.humidValue)
+  console.log(humidValue)
+    const [humidity, setHumid] = useState( humidValue.humidValue === undefined ? 0 : humidValue.humidValue.value)
     const marks = [
         {
           value: 30,
@@ -105,53 +104,48 @@ function HumidityTab(humidValue) {
 }
 
 export default function Equalizer({switchTab}) {
-
-    const [sensorData, setSensorData] = useState([{}]);
-    useEffect(() => {
-      async function fetchData() {
-        const response1 = await axios.get(
-          "https://io.adafruit.com/api/v2/thinhdanghcmut/feeds/cs-ce-dadn.humi-sensor/data"
-        );
-        const object1 = response1.data.reverse();
-  
-        const response2 = await axios.get(
-          "https://io.adafruit.com/api/v2/thinhdanghcmut/feeds/cs-ce-dadn.temp-sensor/data"
-        );
-        const object2 = response2.data.reverse();
-  
-        return [object1, object2];
-      }
-      fetchData().then(([ob1, ob2]) => {
-        setSensorData(
-          ob1.map((item,index) => {
-            return {
-              humidValue: item.value,
-              tempValue: ob2[index].value,
-              date: new Date(item.created_at),
-            };
-          })
-        );
-  
-        })
-        // childToParent(sensorData);
-        switchTab(tab)
-        console.log(sensorData);
-  
-      },[sensorData]);
-
     const [tab, setTab] = React.useState(0);
     const handleSwitchTab = (e, newValue) => {
       setTab(newValue);
+      switchTab(newValue)
     };
-    console.log(tab)
+    const [temp, setTemp] = React.useState([])
+    const [humid, setHumid] = React.useState([])
+    // console.log(temp[temp.length - 1])
+    useEffect(() => {
+      const timeStart = new Date("2023-03-20T00:00:00Z").getTime().toString();
+      const timeEnd = new Date("2023-03-20T18:00:00Z").getTime().toString();
+      const API_URL = `http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${process.env.REACT_APP_ENITYID}/values/timeseries?keys=TEMPERATURE,HUMIDITY&startTs=${timeStart}&endTs=${timeEnd}&interval=60000&limit=100`;
+      async function fetchData() {
+       const response = await axios.get(API_URL, {
+            headers: {
+              "X-Authorization": process.env.REACT_APP_JWT_TOKEN,
+              "Content-Type": "application/json",
+            },
+          })
+          return response.data
+      }
+        fetchData().then(data => {
+          setTemp(data['TEMPERATURE'].map(item => {
+            return{
+              value: item.value
+            }
+          }))
+          setHumid(data['HUMIDITY'].map(item=> {
+            return{
+              value: item.value
+            }
+          }))
+        })
+    }, [temp, humid]);
 
     return (
         <div className='equalizer-container'>
             {tab === 0 && ( // temperature
-                <TemperatureTab tempValue={sensorData[sensorData.length-1].tempValue}/>
+                <TemperatureTab tempValue={temp[temp.length - 1]}/>
             )}
             {tab === 1 && ( // humidity
-                <HumidityTab humidValue={sensorData[sensorData.length-1].humidValue}/>
+                <HumidityTab humidValue={humid[humid.length - 1]}/>
             )}            
             <Tabs value={tab} onChange={handleSwitchTab} aria-label="Tabs" centered>
                 <Tab icon={<img src="temp-icon.svg" alt="Temperature icon"/>} aria-label="Temperature" />

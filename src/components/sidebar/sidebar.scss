@@ -4,8 +4,8 @@
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   background-color: #313140;
-  .active{
-    background-color: #ddd;
+  .active {
+    background-color: #9b9b9b;
   }
   .top {
     height: 50px;
@@ -22,7 +22,7 @@
 
   hr {
     height: 0;
-    border: 0.5px solid rgb(230, 227, 227);
+    border: 0.5px solid rgb(255, 255, 255);
   }
 
   .center {
@@ -36,7 +36,7 @@
       .title {
         font-size: 10px;
         font-weight: bold;
-        color: #999;
+        color: #ffffff;
         margin-top: 15px;
         margin-bottom: 5px;
       }
@@ -46,20 +46,17 @@
         align-items: center;
         padding: 5px;
         cursor: pointer;
-
         &:hover {
-          background-color: #ece8ff;
+          background-color: #afafaf;
         }
-
         .icon {
           font-size: 18px;
-          color: black;
+          color: white;
         }
-
         span {
           font-size: 13px;
           font-weight: 600;
-          color: #888;
+          color: #ffffff;
           margin-left: 10px;
         }
       }

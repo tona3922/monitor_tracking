@@ -78,7 +78,7 @@ const Widget = ({ type, tempValue, humidValue }) => {
   }
 
   return (
-    <div className="widget bg-slate-300">
+    <div className="widget">
       <div className="left">
         <span className="text-[red]">{data.title}</span>
         <span className="counter">  
