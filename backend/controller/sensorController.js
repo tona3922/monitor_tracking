@@ -30,5 +30,8 @@ export default new (class SensorController {
         //         console.log(err)
         //         res.status(401).json("Unconnected")
         //     })
+        await SensorModel.find({})
+            .then(data => res.json(data))
+            .catch(err => res.status(500).send('Error getting users'))
     }
 })();

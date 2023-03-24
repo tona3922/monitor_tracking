@@ -1,12 +1,23 @@
 .sidebar {
   // flex: none;
   min-width: 250px;
-  border-right: 0.5px solid rgb(230, 227, 227);
-  min-height: 100vh;
-  background-color: #313140;
-  .active {
-    background-color: #9b9b9b;
-  }
+  top: 0;
+  left: 0;
+  position: sticky;
+  // border-right: 0.5px solid rgb(230, 227, 227);
+  height: 100vh;
+  background-color: #26263d;
+  // .active {
+  //   background-color: #afafaf;
+  //   .center {
+  //     span {
+  //       color: black;
+  //     }
+  //     .icon {
+  //       color: black;
+  //     }
+  //   }
+  // }
   .top {
     height: 50px;
     display: flex;
@@ -40,14 +51,21 @@
         margin-top: 15px;
         margin-bottom: 5px;
       }
-
+      // Link {
       li {
         display: flex;
         align-items: center;
         padding: 5px;
         cursor: pointer;
-        &:hover {
+        &:hover,
+        &:active {
           background-color: #afafaf;
+          span {
+            color: black;
+          }
+          .icon {
+            color: black;
+          }
         }
         .icon {
           font-size: 18px;
