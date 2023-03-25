@@ -5,6 +5,20 @@
     width: calc(100% - 250px);
     display: flex;
     flex-direction: column;
+    &::-webkit-scrollbar {
+      height: 0;
+      width: 0;
+    }
+  
+  &::-webkit-scrollbar-thumb {
+      height: 0;
+      width: 0;
+  }
+  
+  &::-webkit-scrollbar-track {
+      height: 0;
+      width: 0;
+  }
     .homeContainer {
       --tw-bg-opacity: 1;
       background-color: 	#282b30;

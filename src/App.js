@@ -5,6 +5,7 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
+import './App.scss'
 import Sidebar from "./components/sidebar/Sidebar";
 // import "./style/dark.scss";
 // import { useContext } from "react";
