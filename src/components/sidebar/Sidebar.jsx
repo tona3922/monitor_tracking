@@ -67,52 +67,60 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/">
-            <li
-              onClick={() => handleTabClick("")}
-              className={activeTab === "" ? "active" : ""}
-            >
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
-            </li>
-          </Link>
+          <NavLink to="/" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
+            <DashboardIcon className="icon" />
+            <span>Dashboard</span>
+          </NavLink>
 
           <p className="title">WHAT'S GOING ON</p>
-          <Link to="/products">
-            <li
-              onClick={() => handleTabClick("products")}
-              className={activeTab === "products" ? "active" : ""}
-            >
-              <InsertChartIcon className="icon" />
-              <span>Stats</span>
-            </li>
-          </Link>
-          <li>
+          <NavLink to="/products" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
+            <InsertChartIcon className="icon" />
+            <span>Stats</span>
+          </NavLink>
+
+          <NavLink to="/noti" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
-          </li>
+          </NavLink>
+
           <p className="title">SERVICE</p>
-          <li>
+          <NavLink to="/syscheck" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
             <span>System Check</span>
-          </li>
-          <li>
+          </NavLink>
+          <NavLink to="/mindset" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
             <PsychologyOutlinedIcon className="icon" />
             <span>Mindset</span>
-          </li>
-          <li>
+          </NavLink>
+          <NavLink to="/settings" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
-          </li>
+          </NavLink>
           <p className="title">USER</p>
-          <li>
+          <NavLink to="/user" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
-          </li>
-          <li>
+          </NavLink>
+          <NavLink to="/logout" className={
+            ({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : "navlink"
+          }>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
-          </li>
+          </NavLink>
         </ul>
       </div>
     </div>
