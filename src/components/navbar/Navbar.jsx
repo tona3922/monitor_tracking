@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="left">
           <h1 className="text-white-primary font-semibold text-[28px]">Dashboard</h1>
           <div className="item">
-            <input placeholder="search" className="rounded-[10px] px-[10px]"/>
+            <input placeholder="search" className="rounded-[10px] px-[10px]" />
             <SearchIcon className="icon" />
           </div>
         </div>
@@ -20,9 +20,9 @@ const Navbar = () => {
           <div className="item">
             <NotificationsNoneOutlinedIcon className="icon" />
           </div>
-          <div className="item">
+          {/* <div className="item">
             <ChatBubbleOutlineOutlinedIcon className="icon" />
-          </div>
+          </div> */}
           <div className="item">
             <img src={profileimage} alt="" className="avatar" />
           </div>

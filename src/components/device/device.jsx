@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import "./device.scss";
@@ -101,8 +102,10 @@ let deviceData = [
 ];
 
 const Device = () => {
+  // const [status, setStatus] = useState(false)
   const [list, setList] = useState(deviceData);
   const [flag, setFlag] = useState(false);
+  // console.log(status)
 
   const handleSwitch = (event) => {
     setFlag(event.target.checked);
@@ -115,14 +118,42 @@ const Device = () => {
       } else return item;
     });
   };
+  
+
+
+  const postMethodDevice = async (id) => {
+    const requestData = {
+      method: `setFan_${id}`,
+      params: list.find(item => item.id === id).status  === true ? "Off" : "On",
+    };
+    console.log(requestData);
+    const ENTITY_ID = "36c1d630-c489-11ed-9b15-dd2dac50548f"
+    const URL = `https://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENTITY_ID}/SHARED_SCOPE`
+    try {
+        await axios.post(URL, requestData,{
+        headers:{
+          'X-Authorization': process.env.REACT_APP_JWT_TOKEN,
+          'Content-Type' : 'application/json'
+        }
+      }).then((response) =>{
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  };
 
   const handleClick = (id) => {
     setList(updateDevice(id));
+    postMethodDevice(id);
+    // setStatus(item => !item)
   };
 
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
+  // useEffect(() => {
+  //   console.log(list);
+  // }, [list]);
 
   return (
     <div className="mx-[25px]">
@@ -163,7 +194,7 @@ const Device = () => {
                   )}
                   <div className="flex flex-col items-end p-[20px]">
                     <IOSSwitch
-                      defaultChecked={false}
+                      defaultChecked={item.status}
                       onChange={handleSwitch}
                       onClick={() => handleClick(item.id)}
                     />
@@ -208,7 +239,7 @@ const Device = () => {
                 <img src="light.svg" className="w-[30px]" />
                 <div className="flex flex-col items-baseline">
                   <p className="text-white-primary text-[14px] ml-[20px]">
-                  Light 2
+                    Light 2
                   </p>
                   <p className="text-[10px] text-[#7A7A7A]">
                     Active for 3 hours
