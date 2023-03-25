@@ -60,7 +60,7 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
 
 
   return (
-    <div className="chart w-[800px] px-[10px] mr-[20px]">
+    <div className="chart w-[700px] px-[10px] mr-[20px]">
       <div className="title">{title}</div>
         <div>
         <LineChart

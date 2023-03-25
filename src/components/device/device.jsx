@@ -211,15 +211,15 @@ const Device = () => {
           </div>
         </div>
         <div className="w-1/2">
-          <h1 className="font-semibold text-[28px] text-white-primary">
+          <h1 className="font-semibold text-[28px] text-white-primary mb-[10px]">
             Light & Fan
           </h1>
-          <div className="bg-status-off h-[350px] rounded-[20px]">
+          <div className="bg-status-off h-fit rounded-[20px]">
             <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
+              <div className="flex items-start w-[120px]">
                 <img src="light.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
+                <div className="flex flex-col">
+                  <p className="text-white-primary text-[14px]">
                     Light 1
                   </p>
                   <p className="text-[10px] text-[#7A7A7A]">
@@ -235,11 +235,11 @@ const Device = () => {
             </div>
 
             <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
+              <div className="flex items-start w-[120px]">
                 <img src="light.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Light 2
+                <div className="flex flex-col">
+                  <p className="text-white-primary text-[14px]">
+                    Light 1
                   </p>
                   <p className="text-[10px] text-[#7A7A7A]">
                     Active for 3 hours
@@ -254,11 +254,11 @@ const Device = () => {
             </div>
 
             <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
+              <div className="flex items-start w-[120px]">
                 <img src="light.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Light 3
+                <div className="flex flex-col">
+                  <p className="text-white-primary text-[14px]">
+                    Light 1
                   </p>
                   <p className="text-[10px] text-[#7A7A7A]">
                     Active for 3 hours
@@ -273,11 +273,11 @@ const Device = () => {
             </div>
 
             <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
-                <img src="fan.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Fan 1
+              <div className="flex items-start w-[120px]">
+                <img src="light.svg" className="w-[30px]" />
+                <div className="flex flex-col">
+                  <p className="text-white-primary text-[14px]">
+                    Light 1
                   </p>
                   <p className="text-[10px] text-[#7A7A7A]">
                     Active for 3 hours
@@ -292,11 +292,11 @@ const Device = () => {
             </div>
 
             <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
-                <img src="fan.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Fan 2
+              <div className="flex items-start w-[120px]">
+                <img src="light.svg" className="w-[30px]" />
+                <div className="flex flex-col">
+                  <p className="text-white-primary text-[14px]">
+                    Light 1
                   </p>
                   <p className="text-[10px] text-[#7A7A7A]">
                     Active for 3 hours
@@ -309,6 +309,8 @@ const Device = () => {
                 </p>
               </div>
             </div>
+
+            
           </div>
         </div>
       </div>

@@ -63,7 +63,6 @@ function TemperatureTab(tempValue) {
 }
 
 function HumidityTab(humidValue) {
-  console.log(humidValue)
     const [humidity, setHumid] = useState( humidValue.humidValue === undefined ? 0 : humidValue.humidValue.value)
     const marks = [
         {
@@ -111,7 +110,6 @@ export default function Equalizer({switchTab}) {
     };
     const [temp, setTemp] = React.useState([])
     const [humid, setHumid] = React.useState([])
-    // console.log(temp[temp.length - 1])
     useEffect(() => {
       const timeStart = new Date("2023-03-20T00:00:00Z").getTime().toString();
       const timeEnd = new Date("2023-03-20T18:00:00Z").getTime().toString();
