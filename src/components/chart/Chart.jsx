@@ -46,9 +46,7 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
     const intervalId = setInterval(() => {
       fetchData().then(data => {
         // childToParent(data)
-        if (data) {
-          setTimeStart(new Date(Date.now() - (3600 * 1000 * 2)))
-          setTimeEnd(new Date())
+        if (Object.keys(data).length !== 0) {
           setData(data['temperature'].reverse().map((item, index) => {
             return {
               temperature: item['value'],
@@ -59,13 +57,19 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
           )
           setLoad(false)
         }
+        else {
+          setLoad(true)
+        }
+        setTimeStart(new Date(Date.now() - (3600 * 1000 * 2)))
+        setTimeEnd(new Date())
+
       }
       )
       // Call the API every 5 seconds
     }, 5000);
     return () => clearInterval(intervalId);
 
-  }, [data]);
+  }, [data, timeEnd, timeStart]);
 
 
   return (
