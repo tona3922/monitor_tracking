@@ -50,7 +50,7 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
           setData(data['temperature'].reverse().map((item, index) => {
             return {
               temperature: item['value'],
-              humidity: data['humidity'][index]['value'],
+              humidity: data['humidity'][data['humidity'].length - index - 1]['value'],
               ts: new Date(item.ts)
             }
           })
