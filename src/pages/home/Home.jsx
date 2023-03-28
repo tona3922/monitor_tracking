@@ -8,7 +8,7 @@ import WareHouseTab from "../../components/warehousetab/warehousetab"
 import Device from "../../components/device/device"
 import Equalizer from "../../components/equalizer/equalizer"
 import Navbar from "../../components/navbar/Navbar";
-
+import { Grid } from "@mui/material";
 
 
 const Home = () => {
@@ -25,13 +25,24 @@ const Home = () => {
         <Navbar />
         <div className="homeContainer">
           {/* <WareHouseTab /> */}
-          <div className="temp--humid">
+          {/* <div className="temp--humid">
             <Equalizer switchTab={switchTab} />
             <Chart
               title="Sensor Value Collection at Warehouse"
               getTab={getTab}
             />
-          </div>
+          </div> */}
+          <Grid container alignItems="flex-end" justifyContent="space-evenly" style={{marginBottom: '10px'}}>
+            <Grid item md={12} lg={4}>
+              <Equalizer switchTab={switchTab} />
+            </Grid>
+            <Grid item md={12} lg={7}>
+              <Chart
+                title="Sensor Value Collection at Warehouse"
+                getTab={getTab}
+              />              
+            </Grid>            
+          </Grid>          
           <Device />
         </div>
       </div>

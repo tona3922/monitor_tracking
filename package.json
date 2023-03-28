@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.0.0",
-    "@emotion/react": "^11.8.1",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.4.4",
-    "@mui/material": "^5.4.4",
+    "@mui/material": "^5.11.15",
     "@mui/styles": "^5.11.13",
     "@mui/x-data-grid": "^5.5.1",
     "@testing-library/jest-dom": "^5.16.2",
