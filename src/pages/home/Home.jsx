@@ -17,12 +17,13 @@ const Home = () => {
     setGetTab(item)
   }
   console.log(getTab);
+  const [showSidebar, setShowSideBar] = useState()
 
   return (
     <div className="home">
-      <Sidebar />
+      <Sidebar isOpen={showSidebar} setIsOpen={setShowSideBar}/>
       <div className="main-section">
-        <Navbar />
+        <Navbar isOpen={showSidebar} setIsOpen={setShowSideBar}/>
         <div className="homeContainer">
           {/* <WareHouseTab /> */}
           {/* <div className="temp--humid">

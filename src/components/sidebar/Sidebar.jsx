@@ -12,17 +12,19 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useMediaQuery, Drawer, IconButton } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu'
 import "./sidebar.scss";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
-const Sidebar = () => {
-  const [activeTab, setActiveTab] = useState("");
+const SidebarContent = () => {
+  const [activeTab, setActiveTab] = useState(true);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  console.log(activeTab);
+  // console.log(activeTab);
 
   return (
     <div className="sidebar">
@@ -126,5 +128,26 @@ const Sidebar = () => {
     </div>
   );
 };
+
+const Sidebar = ({isOpen, setIsOpen}) => {
+  const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      {isSmallScreen ? (
+          <Drawer anchor="left" open={isOpen} onClose={handleToggle}>
+            <SidebarContent />
+          </Drawer>
+      ) : ( 
+          <SidebarContent />
+      )}
+    </div>
+  );
+
+}
 
 export default Sidebar;
