@@ -92,7 +92,7 @@ export const userRows = [
     id: 7,
     username: "LED SMD",
     img: "http://ledcaocap.vn/upload/aceweb/thumbnail/300x300xdefault/upload/aceweb/product/led-nha-xuong-dui-e27.png",
-    type: "Light",  
+    type: "Light",
     status: "active",
     active: "4 hours",
   },
@@ -104,5 +104,4 @@ export const userRows = [
     status: "passive",
     active: "4 hours",
   },
-  
 ];

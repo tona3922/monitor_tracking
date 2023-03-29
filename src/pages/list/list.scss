@@ -3,5 +3,8 @@
   width: 100%;
   .listContainer {
     flex: 6;
+    .spec {
+      background-color: rgb(49 49 64);
+    }
   }
 }
