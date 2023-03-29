@@ -12,17 +12,19 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useMediaQuery, Drawer, IconButton } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu'
 import "./sidebar.scss";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
-const Sidebar = () => {
-  const [activeTab, setActiveTab] = useState("");
+const SidebarContent = () => {
+  const [activeTab, setActiveTab] = useState(true);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  console.log(activeTab);
+  // console.log(activeTab);
 
   return (
     <div className="sidebar">
@@ -34,7 +36,7 @@ const Sidebar = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0_1601_734)">
+          <g clipPath="url(#clip0_1601_734)">
             <path
               d="M16.6255 0.30188L37.1375 20.7309V31.6981H27.5652V24.6734L12.6671 9.83541H9.57228V31.6981H0V0.30188H16.6255ZM27.5652 11.1974V0.30188H37.1375V11.1974H27.5652Z"
               fill="url(#paint0_linear_1601_734)"
@@ -49,8 +51,8 @@ const Sidebar = () => {
               y2="36.9218"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#EDBAFF" />
-              <stop offset="1" stop-color="#A1FFFF" />
+              <stop stopColor="#EDBAFF" />
+              <stop offset="1" stopColor="#A1FFFF" />
             </linearGradient>
             <clipPath id="clip0_1601_734">
               <rect width="37.8182" height="32" fill="white" />
@@ -150,5 +152,26 @@ const Sidebar = () => {
     </div>
   );
 };
+
+const Sidebar = ({isOpen, setIsOpen}) => {
+  const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      {isSmallScreen ? (
+          <Drawer anchor="left" open={isOpen} onClose={handleToggle}>
+            <SidebarContent />
+          </Drawer>
+      ) : ( 
+          <SidebarContent />
+      )}
+    </div>
+  );
+
+}
 
 export default Sidebar;

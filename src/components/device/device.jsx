@@ -3,6 +3,7 @@ import axios from "axios";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import "./device.scss";
+import { Grid } from "@mui/material";
 // import mqtt as
 
 const IOSSwitch = styled((props) => (
@@ -101,11 +102,19 @@ let deviceData = [
   },
 ];
 
+const lightAndFanState = [
+  {name: "Light 1", img: "light.svg", uptime: 3, level: 60},
+  {name: "Light 2", img: "light.svg", uptime: 3, level: 60},
+  {name: "Light 3", img: "light.svg", uptime: 3, level: 60},
+  {name: "Fan 1", img: "fan.svg", uptime: 3, level: 60},
+  {name: "Fan 2", img: "fan.svg", uptime: 3, level: 60},
+]
+
 const Device = () => {
   // const [status, setStatus] = useState(false)
   const [list, setList] = useState(deviceData);
   const [flag, setFlag] = useState(false);
-  // console.log(status)
+  const [lightAndFan, setLightAndFan] = useState(lightAndFanState)
 
   const handleSwitch = (event) => {
     setFlag(event.target.checked);
@@ -156,7 +165,95 @@ const Device = () => {
   // }, [list]);
 
   return (
-    <div className="mx-[25px]">
+    <>
+    <Grid container>
+      <Grid item xs={12} lg={8}>
+      <div className="ml-5 mr-5 mb-5">
+          <div className="flex items-end mb-[10px] justify-between">
+            <h1 className="font-semibold text-[28px] text-white-primary">
+              My Devices
+            </h1>
+            <div className="flex items-center mx-[25px]">
+              <p className="text-white-primary text-[12px] mr-[5px]">
+                AUTO MODE
+              </p>
+              <IOSSwitch defaultChecked={false} />
+            </div>
+          </div>
+          <Grid container alignItems="stretch">
+            {list.map((device) => (
+              <Grid item xs={12} sm={6} md={4} key={device.id} style={{ marginTop: '10px' }}>
+              <div
+                className={
+                  `rounded-[20px] shadow ml-[10px] flex justify-between px-[10px] h-[100%]
+                  ${device.status
+                    ? "bg-status-on"
+                    : "bg-status-off"}`
+                }
+              >
+                {/* <div className="flex justify-between px-[10px] pt-[10px]"> */}
+                  {device.status ? (
+                    <img
+                      src={device["icon-on"]}
+                      className="w-[80px] fill-white-primary"
+                    />
+                  ) : (
+                    <img
+                      src={device["icon-off"]}
+                      className="w-[80px] fill-white-primary"
+                    />
+                  )}
+                  <div className="flex flex-col items-end p-[20px]">
+                    <IOSSwitch
+                      defaultChecked={device.status}
+                      onChange={handleSwitch}
+                      onClick={() => handleClick(device.id)}
+                    />
+                    <div className="text-white-primary flex flex-col items-end mt-[20px]">
+                      <p className="text-[17px] font-semibold">{device.label}</p>
+                      <p className="text-[10px] text-[#7A7A7A]">
+                        Active for 3 hours
+                      </p>
+                    </div>
+                  {/* </div> */}
+                </div>
+              </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </Grid>
+      <Grid item xs={12} lg={4}>
+      <div className="ml-5 mr-5 mb-5">
+          <h1 className="font-semibold text-[28px] text-white-primary">
+            Light & Fan
+          </h1>
+          <div className="bg-status-off rounded-[20px]">
+            {lightAndFan.map((device, index) => (
+              <div className="flex items-center p-[15px] justify-between" key={index}>
+              <div className="flex items-center">
+                <img src={device.img} className="w-[30px]" />
+                <div className="flex flex-col items-baseline">
+                  <p className="text-white-primary text-[14px] ml-[20px]">
+                    {device.name}
+                  </p>
+                  <p className="text-[10px] text-[#7A7A7A]">
+                    Active for {device.uptime} hours
+                  </p>
+                </div>
+              </div>
+              <div className="ml-[100px]">
+                <p className="text-white-primary font-semibold text-[13px]">
+                  {device.level}%
+                </p>
+              </div>
+            </div>
+            ))}
+          </div>
+        </div>        
+      </Grid>      
+    </Grid>
+    {/* <div className="mx-[25px]">
       <div className="flex justify-between">
         <div className="">
           <div className="flex items-end mb-[10px] justify-between">
@@ -312,7 +409,8 @@ const Device = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
+    </>
   );
 };
 
