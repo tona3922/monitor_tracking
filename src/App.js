@@ -5,21 +5,31 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
+import { useState } from "react";
 import "./App.scss";
 // import Sidebar from "./components/sidebar/Sidebar";
 // import "./style/dark.scss";
 // import { useContext } from "react";
 // import { DarkModeContext } from "./context/darkModeContext";
 
+import { selectUser } from "./storage/figures/user";
+import { useSelector } from 'react-redux'
+
 export default function App() {
   // const { darkMode } = useContext(DarkModeContext);
+
+  const user = useSelector(selectUser)
 
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
+            <Route index element={
+              user.email !== ''
+                ? <Home />
+                : <Login />
+            } />
             <Route path="login" element={<Login />} />
             <Route path="users">
               <Route index element={<List />} />

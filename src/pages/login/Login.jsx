@@ -4,11 +4,19 @@ import { useState } from "react";
 import axios from "axios";
 import "./login.scss";
 
+import { useSelector, useDispatch } from 'react-redux'
+import { login, selectUser } from "../../storage/figures/user";
+
 const Login = () => {
+
   const [info, setInfo] = useState({
     email: "",
     password: "",
   });
+
+  const user = useSelector(selectUser);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChangeUserName = (e) => {
@@ -30,10 +38,12 @@ const Login = () => {
   };
   const _handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      await axios
-        .post("http://localhost:8080/account/login", info)
-        .then((req) => navigate("/"))
-        .catch((err) => console.log("Wrong Account/Password"));
+      // await axios
+      //   .post("http://localhost:8080/account/login", info)
+      //   .then((req) => navigate("/"))
+      //   .catch((err) => console.log("Wrong Account/Password"));
+      // e.preventDefault() 
+      dispatch(login(info))
     }
   };
   return (

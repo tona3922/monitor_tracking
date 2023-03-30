@@ -25,6 +25,7 @@
       display: flex;
       flex-direction: column;
       flex-grow: 2;
+      
       .widgets,
       .charts {
         display: flex;
@@ -37,11 +38,13 @@
       }
 
       .temp--humid{
+        gap: 30px;
         // margin: auto;
+        margin: 30px;
         display: flex;
         flex-direction: row;
         // align-items: stretch;
-        @media screen and (max-width: 1208px){
+        @media screen and (max-width: 1200px){
           flex-direction: column;
         }
       }
@@ -56,6 +59,16 @@
           font-weight: 500;
           color: gray;
           margin-bottom: 15px;
+        }
+      }
+
+      .pair {
+        margin: 15px 30px;
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        @media screen and (max-width: 1200px){
+          flex-direction: column;
         }
       }
     }

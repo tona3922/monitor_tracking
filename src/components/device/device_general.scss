@@ -1,0 +1,23 @@
+
+.device-wrapp {
+    width: 100%;
+    // gap: 30;
+    
+    .device-type {
+        // margin-left: 30px;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .device-tag-container {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        // padding: 30px;
+        // width: 90%;
+        border-radius: 30px;
+        background-color: 	#1e2124;
+        // height: 400px;
+        
+    }
+}
