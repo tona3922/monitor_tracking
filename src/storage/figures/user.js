@@ -7,7 +7,8 @@ const initialState = {
         email: '',
         name: '',
         gender: '',
-        JWT_Token: process.env.JWT_Token
+        JWT_Token: process.env.JWT_Token,
+        login: 0,
     }
 }
 
@@ -16,13 +17,17 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess: (state, user) => {
+            state.user = {
+                ...user.payload,
+                login: 1
+            }
+        },
 
-            // state = {
-            //     ...state,
-            //     user: user
-            // }
-            state.user = user.payload
-
+        loginFailure: (state) => {
+            state.user = {
+                ...state.user,
+                login: -1
+            }
         },
 
         logoutHome: (state) => {
@@ -33,7 +38,7 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { loginSuccess, logoutHome } = userSlice.actions
+export const { loginSuccess, loginFailure, logoutHome } = userSlice.actions
 
 export const login = (info) => async dispatch => {
     // const navigate = useNavigate()
@@ -48,7 +53,7 @@ export const login = (info) => async dispatch => {
             dispatch(loginSuccess(res.data))
             // navigate("/")
         })
-        .catch((err) => console.log(err))
+        .catch((err) => dispatch(loginFailure()))
 
 }
 

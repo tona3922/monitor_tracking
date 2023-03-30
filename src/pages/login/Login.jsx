@@ -70,7 +70,7 @@ const Login = () => {
             />
           </div>
         </div>
-
+        {user.login == -1 && <span>Password/Username incorrect, Try again !!!</span>}
         <div className="link">
           Do not have an account : <Link to="/users/new">Sign Up</Link>
         </div>
