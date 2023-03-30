@@ -5,6 +5,7 @@ import axios from "axios";
 import "./login.scss";
 
 const Login = () => {
+  const [err, setErr] = useState(false);
   const [info, setInfo] = useState({
     email: "",
     password: "",
@@ -12,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleChangeUserName = (e) => {
+    e.preventDefault();
     setInfo((prev) => {
       return {
         ...prev,
@@ -21,6 +23,7 @@ const Login = () => {
   };
 
   const handleChangePassword = (e) => {
+    e.preventDefault();
     setInfo((prev) => {
       return {
         ...prev,
@@ -33,7 +36,10 @@ const Login = () => {
       await axios
         .post("http://localhost:8080/account/login", info)
         .then((req) => navigate("/"))
-        .catch((err) => console.log("Wrong Account/Password"));
+        .catch((err) => {
+          console.log("Wrong Account/Password");
+          setErr(true);
+        });
     }
   };
   return (
@@ -59,7 +65,7 @@ const Login = () => {
             />
           </div>
         </div>
-
+        {err && <span>Password/Username inccorrect, Try again !!!</span>}
         <div className="link">
           Do not have an account : <Link to="/users/new">Sign Up</Link>
         </div>
