@@ -44,6 +44,7 @@ const Login = () => {
       //   .catch((err) => console.log("Wrong Account/Password"));
       // e.preventDefault() 
       dispatch(login(info))
+      navigate('/')
     }
   };
   return (
