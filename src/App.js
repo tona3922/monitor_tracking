@@ -27,9 +27,9 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={
-              user == undefined || user.email !== ''
-                ? <Home />
-                : <Login />
+              user == undefined || user.login !== 1
+                ? <Login />
+                : <Home />
             } />
             <Route path="login" element={<Login />} />
             <Route path="users">
@@ -37,7 +37,11 @@ export default function App() {
               <Route path=":userId" element={<Single />} />
               <Route
                 path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
+                element={
+                  user == undefined || user.login !== 1
+                    ? <New inputs={userInputs} title="Add New User" />
+                    : <Navigate to="/" />
+                }
               />
             </Route>
             <Route path="products">

@@ -30,15 +30,30 @@ export const userSlice = createSlice({
             }
         },
 
+        registerSuccess: (state, user) => {
+            console.log(user)
+            state.user = {
+                ...user.payload,
+                login: 1
+            }
+        },
+
+        registerFailure: (state, user) => {
+            state.user = {
+                ...state.user,
+                login: -1
+            }
+        },
+
         logoutHome: (state) => {
             state.user = initialState.user
-        }
+        },
 
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { loginSuccess, loginFailure, logoutHome } = userSlice.actions
+export const { loginSuccess, loginFailure, registerSuccess, registerFailure, logoutHome } = userSlice.actions
 
 export const login = (info) => async dispatch => {
     // const navigate = useNavigate()
@@ -55,6 +70,14 @@ export const login = (info) => async dispatch => {
         })
         .catch((err) => dispatch(loginFailure()))
 
+}
+
+export const register = (info) => async dispatch => {
+    await axios
+        .post("http://localhost:8080/account/register", info)
+        .then((res) => {
+            dispatch(registerSuccess(res.data))
+        })
 }
 
 export const selectUser = (state) => state.user.user

@@ -17,7 +17,7 @@ export default new (class AccountController {
   register = async (req, res) => {
     var email = req.body.email
     var password = req.body.password
-    var gender = req.body.gender
+    var gender = req.body.gender ? req.body.gender : 'M'
     var name = req.body.name
 
     AccountModel.findOne({
@@ -25,17 +25,19 @@ export default new (class AccountController {
       password: password,
     })
       .then((data) => {
-        console.log(data)
-        data && res.status(300).send("Failed")
+        if (data) { res.status(300).send("Failed") }
+        else {
+          AccountModel.create({
+            email: email,
+            password: password,
+            gender: gender,
+            name: name,
+          })
+            .then((data) => {
+              res.status(201).send(data)
+            })
+            .catch((err) => res.status(500).json("Server crashed!"))
+        }
       })
-
-    AccountModel.create({
-      email: email,
-      password: password,
-      gender: gender,
-      name: name,
-    })
-      .then((data) => res.status(201).send("Success"))
-      .catch((err) => res.status(500).json("Server crashed!"));
   };
 })();
