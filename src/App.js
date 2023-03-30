@@ -3,7 +3,7 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import { useState } from "react";
 import "./App.scss";
@@ -14,6 +14,7 @@ import "./App.scss";
 
 import { selectUser } from "./storage/figures/user";
 import { useSelector } from 'react-redux'
+import Logout from "./pages/logout/logout";
 
 export default function App() {
   // const { darkMode } = useContext(DarkModeContext);
@@ -26,7 +27,7 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={
-              user.email !== ''
+              user == undefined || user.email !== ''
                 ? <Home />
                 : <Login />
             } />
@@ -48,6 +49,10 @@ export default function App() {
               />
             </Route>
             <Route path="/nav2" element={<Home />} />
+            <Route path="/logout" element={
+              < Logout />
+              //  : <Navigate to="/" />
+            } />
           </Route>
         </Routes>
       </BrowserRouter>

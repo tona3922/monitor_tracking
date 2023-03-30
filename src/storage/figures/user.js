@@ -25,11 +25,15 @@ export const userSlice = createSlice({
 
         },
 
+        logoutHome: (state) => {
+            state.user = initialState.user
+        }
+
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { loginSuccess } = userSlice.actions
+export const { loginSuccess, logoutHome } = userSlice.actions
 
 export const login = (info) => async dispatch => {
     // const navigate = useNavigate()
