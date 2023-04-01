@@ -183,7 +183,7 @@ const Login1 = () => {
     </StyledBox> 
     <div style={{width: '100%'}}>
     <Link 
-      href="/forgot-password" 
+      to="/forgot-password" 
       style = {{
         fontSize: "0.8rem",
         color: "#1A7FC1",
@@ -212,6 +212,17 @@ const Login1 = () => {
       </Button>
     </div>
     </form> 
+    <div>
+      Don't have an account?<span> </span>
+      <Link 
+        to="/users/new" 
+        style = {{
+          color: "#1A7FC1",
+        }}
+      >
+      Sign up
+      </Link>         
+    </div>
   </div>
   )
 }
