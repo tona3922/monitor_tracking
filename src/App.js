@@ -15,6 +15,7 @@ import "./App.scss";
 import { selectUser } from "./storage/figures/user";
 import { useSelector } from 'react-redux'
 import Logout from "./pages/logout/logout";
+import {Humidifiers, AirConditioners} from "./components/deviceByType/DevicesListByType";
 
 export default function App() {
   // const { darkMode } = useContext(DarkModeContext);

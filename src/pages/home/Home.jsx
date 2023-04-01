@@ -1,7 +1,6 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.scss";
 import { useState } from "react";
-import ApexChart from "../../components/chart_1/Chart"
 import Chart from "../../components/chart/Chart"
 import Header from "../../components/header/header";
 import WareHouseTab from "../../components/warehousetab/warehousetab"
