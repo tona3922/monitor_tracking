@@ -9,7 +9,7 @@ import Device from "../../components/device/device"
 import Equalizer from "../../components/equalizer/equalizer"
 import Navbar from "../../components/navbar/Navbar";
 import { Grid } from "@mui/material";
-
+import Devices_Info from "../../components/device/device_general";
 
 const Home = () => {
   const [getTab, setGetTab] = useState(0);
@@ -21,19 +21,19 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Sidebar isOpen={showSidebar} setIsOpen={setShowSideBar}/>
+      <Sidebar isOpen={showSidebar} setIsOpen={setShowSideBar} />
       <div className="main-section">
-        <Navbar isOpen={showSidebar} setIsOpen={setShowSideBar}/>
+        <Navbar isOpen={showSidebar} setIsOpen={setShowSideBar} />
         <div className="homeContainer">
-          <WareHouseTab />
-          {/* <div className="temp--humid">
+          {/* <WareHouseTab /> */}
+          <div className="temp--humid">
             <Equalizer switchTab={switchTab} />
             <Chart
               title="Sensor Value Collection at Warehouse"
               // getTab={getTab}
             />
-          </div> */}
-          <Grid container alignItems="flex-end" justifyContent="space-evenly" style={{marginBottom: '10px'}}>
+          </div>
+          {/* <Grid container alignItems="flex-end" justifyContent="space-evenly" style={{marginBottom: '10px'}}>
             <Grid item md={12} lg={4}>
               <Equalizer switchTab={switchTab} />
             </Grid>
@@ -42,12 +42,17 @@ const Home = () => {
                 title="Sensor Value Collection at Warehouse"
                 getTab={getTab}
               />              
-            </Grid>            
-          </Grid>          
+            </Grid>             */}
+          {/* </Grid> */}
+          <div className="pair">
+            <Devices_Info name="Air Conditioner" />
+            <Devices_Info name="Humidifier" />
+          </div>
+
           <Device />
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -7,7 +7,7 @@
     max-width: 500px;
     align-self: center;
     font-family: 'Inter';
-    margin: 40px auto 0;
+    /* margin: 40px auto 0; */
     display: flex;
     flex-direction: column;
     /* margin-left: 40px; */

@@ -138,7 +138,7 @@ const SidebarContent = () => {
             <span>Profile</span>
           </NavLink>
           <NavLink
-            to="/login"
+            to="/logout"
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "active" : "navlink"
             }
@@ -152,7 +152,7 @@ const SidebarContent = () => {
   );
 };
 
-const Sidebar = ({isOpen, setIsOpen}) => {
+const Sidebar = ({ isOpen, setIsOpen }) => {
   const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md
 
   const handleToggle = () => {
@@ -162,11 +162,11 @@ const Sidebar = ({isOpen, setIsOpen}) => {
   return (
     <div>
       {isSmallScreen ? (
-          <Drawer anchor="left" open={isOpen} onClose={handleToggle}>
-            <SidebarContent />
-          </Drawer>
-      ) : ( 
+        <Drawer anchor="left" open={isOpen} onClose={handleToggle}>
           <SidebarContent />
+        </Drawer>
+      ) : (
+        <SidebarContent />
       )}
     </div>
   );
