@@ -19,14 +19,14 @@ export const userInputs = [
   },
   {
     id: 4,
-    label: "Phone",
-    type: "text",
-    placeholder: "",
+    label: "Password",
+    type: "password",
   },
   {
     id: 5,
-    label: "Password",
-    type: "password",
+    label: "Phone",
+    type: "text",
+    placeholder: "",
   },
 ];
 

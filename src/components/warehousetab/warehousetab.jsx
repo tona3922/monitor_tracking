@@ -44,6 +44,8 @@ const WareHouseTab = () => {
     borderRadius: "10px",
   };
   const [open, setOpen] = useState(false);
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("")
   const [nameDevice, setNameDevice] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -59,17 +61,27 @@ const WareHouseTab = () => {
   //   tabs.push({ id: moreTab, label: "Stock " + moreTab });
   //   console.log(tabs);
   // };
-  const handleAddDevice = async () => {
-    const response = await axios.post(
-      "http://localhost:8080/device/add",
-      nameDevice
-    );
-    response.then((data) => console.log(data)).catch((err) => console.log(err));
+  const handleAddDevice = async (e) => {
+    e.preventDefault()
+    const response = await axios
+      .post("http://localhost:8080/device/add", { nameDevice })
+      .then((data) => {
+        console.log(data)
+        setNameDevice("")
+        setOpen(false)
+      })
+      .catch((err) => {
+        console.log(err.response.data)
+        setErr(err.response.data) 
+      });
+      // setOpen(false)
   };
   const handleChangeAddDevice = (e) => {
-    setNameDevice(e.target.value);
-  };
-  console.log(nameDevice)
+    setNameDevice(e.target.value)
+    setErr("")
+    // setOk("")
+  };    
+  console.log(nameDevice);
 
   console.log(activeTab);
 
@@ -134,6 +146,7 @@ const WareHouseTab = () => {
                 Add
               </Button>
             </div>
+            {err.length ? <p className="text-[red]">{err}</p> : <></>}
           </Box>
         </Modal>
       </div>

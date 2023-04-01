@@ -51,7 +51,7 @@ counter = 0
 while True:
     collect_data = {'temperature': temp, 'humidity': humi, 'light':light_intesity}
     temp = uniform(30.0, 40.0)
-    humi = uniform(60, 80)
+    humi = uniform(30, 80)
     light_intesity += 1
     client.publish('v1/devices/me/telemetry', json.dumps(collect_data), 1)
     time.sleep(5)
