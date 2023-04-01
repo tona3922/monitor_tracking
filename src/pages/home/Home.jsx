@@ -30,7 +30,7 @@ const Home = () => {
             <Equalizer switchTab={switchTab} />
             <Chart
               title="Sensor Value Collection at Warehouse"
-              getTab={getTab}
+              // getTab={getTab}
             />
           </div>
           {/* <Grid container alignItems="flex-end" justifyContent="space-evenly" style={{marginBottom: '10px'}}>

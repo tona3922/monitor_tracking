@@ -1,4 +1,14 @@
 import { useEffect, useState } from "react";
+import {
+  Box,
+  Modal,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  Button,
+} from "@mui/material";
+import axios from "axios";
 import "./warehousetab.scss";
 
 const warehouseData = [
@@ -21,6 +31,24 @@ const warehouseData = [
 ];
 
 const WareHouseTab = () => {
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 450,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: "10px",
+  };
+  const [open, setOpen] = useState(false);
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("")
+  const [nameDevice, setNameDevice] = useState("");
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [activeTab, setActiveTab] = useState(1);
   const [moreTab, setmoreTab] = useState(5);
   const tabs = warehouseData;
@@ -28,11 +56,33 @@ const WareHouseTab = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  const increasetab = () => {
-    setmoreTab(moreTab + 1);
-    tabs.push({ id: moreTab, label: "Stock " + moreTab });
-    console.log(tabs);
+  // const increasetab = () => {
+  //   setmoreTab(moreTab + 1);
+  //   tabs.push({ id: moreTab, label: "Stock " + moreTab });
+  //   console.log(tabs);
+  // };
+  const handleAddDevice = async (e) => {
+    e.preventDefault()
+    const response = await axios
+      .post("http://localhost:8080/device/add", { nameDevice })
+      .then((data) => {
+        console.log(data)
+        setNameDevice("")
+        setOpen(false)
+      })
+      .catch((err) => {
+        console.log(err.response.data)
+        setErr(err.response.data) 
+      });
+      // setOpen(false)
   };
+  const handleChangeAddDevice = (e) => {
+    setNameDevice(e.target.value)
+    setErr("")
+    // setOk("")
+  };    
+  console.log(nameDevice);
+
   console.log(activeTab);
 
   return (
@@ -59,11 +109,46 @@ const WareHouseTab = () => {
         <button
           className="pl-[10px]"
           onClick={() => {
-            increasetab();
+            handleOpen();
           }}
         >
           + Add Device
         </button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <h2 className="text-poppins font-bold text-[25px] mb-[10px]">
+              Add device
+            </h2>
+            <div className="flex items-center justify-around">
+              <FormControl>
+                <InputLabel htmlFor="my-input">Name of device</InputLabel>
+                <Input
+                  id="my-input"
+                  aria-describedby="my-helper-text"
+                  onChange={handleChangeAddDevice}
+                />
+                <FormHelperText id="my-helper-text">
+                  Must be more than 5 characters.
+                </FormHelperText>
+              </FormControl>
+              <Button
+                onClick={handleAddDevice}
+                variant="outlined"
+                size="small"
+                color="success"
+                sx={{ marginLeft: "10px" }}
+              >
+                Add
+              </Button>
+            </div>
+            {err.length ? <p className="text-[red]">{err}</p> : <></>}
+          </Box>
+        </Modal>
       </div>
     </div>
   );

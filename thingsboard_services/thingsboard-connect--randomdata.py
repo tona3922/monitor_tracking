@@ -7,7 +7,7 @@ from random import *
 BROKER_ADDRESS = "demo.thingsboard.io"
 # BROKER_ADDRESS = "demo.thingsboard.io"
 PORT = 1883
-THINGS_BOARD_ACCESS_TOKEN = "TJE9VzEyfsKnDVaYBpU8"
+THINGS_BOARD_ACCESS_TOKEN = "KA7eQnwq2bK84MItGVWK"
 
 
 def subscribed(client, userdata, mid, granted_qos):

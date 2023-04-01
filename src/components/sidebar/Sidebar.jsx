@@ -63,7 +63,6 @@ const SidebarContent = () => {
         <p className="text-[15px] font-bold ml-[5px] leading-tight text-white-primary">
           Warehouse <br /> Tracking
         </p>
-        {/* </Link> */}
       </div>
       <hr />
       <div className="center">
