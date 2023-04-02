@@ -10,8 +10,8 @@ import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import { Typography, Button } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Typography, Button, FormHelperText } from "@mui/material";
+import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
 
 const StyledBox = styled(Box)({
@@ -41,6 +41,11 @@ const StyledInputBase = styled(InputBase)({
   color: "white",
   flex: 1,
   fontWeight: 'bold',
+});
+
+const StyledFormHelperText = styled(FormHelperText)({
+  float: 'left', 
+  color: 'hotpink'
 });
 
 const Login = () => {
@@ -120,6 +125,7 @@ const Login1 = () => {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState(info) 
 
   const user = useSelector(selectUser);
 
@@ -129,7 +135,9 @@ const Login1 = () => {
   const handleChange = (e) => {
     const {name, value} = e.target
     setInfo({...info, [name]: value})
-    user.login = 0
+    if (errors[name]) {
+      setErrors({...errors, [name]: ""})
+    }    
   }
   const _handleKeyDown = async (e) => {
     if (e.key === "Enter") {
@@ -142,22 +150,34 @@ const Login1 = () => {
       //   .then((req) => navigate("/"))
       //   .catch((err) => console.log("Wrong Account/Password"));
       // e.preventDefault() 
+    // trim space input
+    const trimmedInfo = Object.fromEntries(Object.entries(info).map(([key, value]) => [key, value.trim()]))
+    const errors = {}
+    // check empty input
+    for (const [key, value] of Object.entries(trimmedInfo)) {
+      if (value === '') {
+        errors[key] = 'This field cannot be empty';
+      }
+    }          
+    if (Object.keys(errors).length === 0) {
       dispatch(login(info))
-      navigate('/')   
-      console.log(info)
+      navigate('/') 
+    } else {
+      setErrors(errors)
+    }    
   }
 
   return (
   <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', color: 'white'}}>
+    <form style={{display:'flex', flexDirection: 'column', alignItems: 'center', width: '30%', minWidth: '300px'}}>
     <div style={{marginTop: '15vh', marginBottom: '40px'}}>
     <Typography variant="h4">
       Login
     </Typography>
-    </div>
-    <form style={{display:'flex', flexDirection: 'column', alignItems: 'center', width: '30%'}}>
+    </div>      
     <StyledBox>
       <IconButton aria-label="email">
-        <AccountCircleIcon sx={{ color: "white" }} />
+        <EmailIcon sx={{ color: "white" }} />
       </IconButton>
       <StyledDivider orientation="vertical" flexItem/>
       <StyledInputBase 
@@ -165,8 +185,11 @@ const Login1 = () => {
         name="email"
         value={info.email}
         onChange={handleChange}        
+        error={!!errors.email}
       />
-    </StyledBox>   
+    </StyledBox> 
+    <div style={{width: '90%'}}><StyledFormHelperText>{errors.email}</StyledFormHelperText></div>
+  
     <StyledBox>
       <IconButton aria-label="password">
         <KeyIcon sx={{ color: "white" }} />
@@ -179,8 +202,10 @@ const Login1 = () => {
         value={info.password}
         onChange={handleChange}
         onKeyDown={_handleKeyDown}        
+        error={!!errors.password}
       />
     </StyledBox> 
+    <div style={{width: '90%'}}><StyledFormHelperText>{errors.password}</StyledFormHelperText></div>
     <div style={{width: '100%'}}>
     <Link 
       to="/forgot-password" 
@@ -194,7 +219,7 @@ const Login1 = () => {
       Forgot password?
     </Link>    
     </div>
-    {user.login == -1 && <span>Password or Username incorrect, Try again !!!</span>}    
+    {user.login === -1 && <div style={{textAlign: 'center', color: 'hotpink'}}>Incorrect Username/Password, Try again !!!</div>}    
     <div style={{margin: '20px', width: '100%'}}>
       <Button 
         variant="contained" 
@@ -211,18 +236,18 @@ const Login1 = () => {
           Log in
       </Button>
     </div>
-    </form> 
     <div>
       Don't have an account?<span> </span>
       <Link 
-        to="/users/new" 
+        to="/users/register" 
         style = {{
           color: "#1A7FC1",
         }}
       >
       Sign up
       </Link>         
-    </div>
+    </div>    
+    </form> 
   </div>
   )
 }
