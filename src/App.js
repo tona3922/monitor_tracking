@@ -36,7 +36,7 @@ export default function App() {
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
               <Route
-                path="new"
+                path="register"
                 element={
                   user == undefined || user.login !== 1
                     ? <New inputs={userInputs} title="Add New User" />
