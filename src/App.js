@@ -15,6 +15,7 @@ import "./App.scss";
 import { selectUser } from "./storage/figures/user";
 import { useSelector } from 'react-redux'
 import Logout from "./pages/logout/logout";
+import Devices from "./pages/devices/devices";
 
 export default function App() {
   // const { darkMode } = useContext(DarkModeContext);
@@ -53,6 +54,10 @@ export default function App() {
               />
             </Route>
             <Route path="/nav2" element={<Home />} />
+            <Route path="/device/*" >
+              <Route path="air-conditioner" element={<Devices type="AC" />} />
+              <Route path="humidifier" element={<Devices type="HM" />} />
+            </Route>
             <Route path="/logout" element={
               < Logout />
               //  : <Navigate to="/" />

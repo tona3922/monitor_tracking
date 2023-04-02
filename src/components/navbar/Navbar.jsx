@@ -7,33 +7,36 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { useMediaQuery, IconButton } from "@mui/material";
 // import Tab from "../tabs/Tab";
 
-const Navbar = ({isOpen, setIsOpen}) => {
+const Navbar = ({ isOpen, setIsOpen, title, searchBar }) => {
   const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md
   const handleToggle = () => {
     setIsOpen(!isOpen);
-  };  
+  };
   return (
     <div className="navbar">
-      <div className="wrapper">       
+      <div className="wrapper">
         <div className="left">
           {isSmallScreen && (
-            <IconButton onClick={handleToggle} sx={{color:"aliceblue"}}>
+            <IconButton onClick={handleToggle} sx={{ color: "aliceblue" }}>
               <MenuIcon />
-            </IconButton>      
-          )}     
-          <h1 
-          className={`text-white-primary font-semibold flex items-center
-          ${!isSmallScreen? "text-[28px]": "text-[20px]"}
+            </IconButton>
+          )}
+          <h1
+            className={`text-white-primary font-semibold flex items-center
+          ${!isSmallScreen ? "text-[28px]" : "text-[20px]"}
           `}
           >
-            Dashboard
+            {title}
           </h1>
-          {!isSmallScreen && (
+
+        </div>
+        <div className="middle">
+          {searchBar && !isSmallScreen && (
             <div className="item">
-              <input placeholder="search" className="rounded-[10px] px-[10px]" />
+              <input placeholder="Search" className="rounded-[10px] px-[10px]" />
               <SearchIcon className="icon" />
-            </div>   
-          )}            
+            </div>
+          )}
         </div>
         <div className="right">
           <div className="item">

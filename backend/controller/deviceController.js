@@ -2,45 +2,79 @@ import { DeviceModel } from "../model/device_model.js";
 import axios from "axios";
 
 export default new (class DeviceController {
-  testing = async (req, res) => {
-    await DeviceModel.find({})
+  airconditioners = async (req, res) => {
+    await DeviceModel.find({ isAirConditioner: true })
+      .then((data) => res.json(data))
+      .catch((err) => res.json(err));
+  }
+
+  humidifiers = async (req, res) => {
+    await DeviceModel.find({ isAirConditioner: false })
       .then((data) => res.json(data))
       .catch((err) => res.json(err));
   };
+
   adding = async (req, res) => {
-    if (req.body.nameDevice) {
-       try {
-        const response1 = await axios
-          .post(
-            "https://demo.thingsboard.io:443/api/v1/provision",
-            {
-              deviceName: req.body.nameDevice,
-              provisionDeviceKey: "hkmp6pz9h7cmuhsadcgy",
-              provisionDeviceSecret: "j3vjmrz0napxw158dq55",
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                "X-Authorization": process.env.JWT_TOKEN,
-              },
-            }
-          )
-          // .then((data) => res.status(200).json(data))
-          // .catch((err) => res.json(data));
-        const response2 = await axios
-          .get(
-          `https://demo.thingsboard.io:443/api/tenant/devices?deviceName=${req.body.nameDevice}`,
+    // console.log(req.body)
+    // res.json("OK")
+    if (req.body.nameDevice && req.body.email) {
+      var numberOfDev = 0
+      await DeviceModel.count({ email: req.body.email })
+        .then(data => { numberOfDev = data })
+        .catch(err => res.status(500))
+      console.log(numberOfDev)
+    }
+    var deviceName = req.body.email + `_${numberOfDev}`
+    var accessToken = ""
+    var deviceID = ""
+
+    try {
+      // Create thingsboard device with an automatic name created by system
+      const response1 = await axios
+        .post(
+          "https://demo.thingsboard.io:443/api/v1/provision",
+          {
+            deviceName: deviceName,
+            provisionDeviceKey: process.env.CUS_PROVISION_DEV_KEY,
+            provisionDeviceSecret: process.env.CUS_PROVISION_DEV_SECRET,
+          },
           {
             headers: {
-              Accept: "application/json",
+              "Content-Type": "application/json",
               "X-Authorization": process.env.JWT_TOKEN,
             },
           }
-        );
-        console.log("Create device: ", response1.data);
-        console.log("Get Device: ", response2?.data?.id?.id);
-        const response3 = await axios.post(
-          `https://demo.thingsboard.io:443/api/customer/public/device/${response2?.data?.id?.id}`,
+        )
+        .then((data) => {
+          data.data['status'] == 'SUCCESS' ? accessToken = data.data['credentialsValue'] : res.status(500).json('Failure')
+          console.log("Device Created with name", deviceName, "and", accessToken)
+        })
+        .catch((err) => res.json(data))
+
+
+      await axios
+        .get(
+          `https://demo.thingsboard.io:443/api/tenant/devices?deviceName=${deviceName}`,
+          {
+            headers: {
+              "accept": "application/json",
+              "X-Authorization": process.env.JWT_TOKEN,
+            },
+          }
+        )
+        .then(data => {
+          console.log('Finding deviceID...')
+          if (data['status'] && data['status'] == 404) res.status(404).json('Device Not Found after created - Max')
+          else deviceID = data.data.id.id
+          console.log('Device ID: ', deviceID)
+        })
+        .catch(err => console.log(err))
+
+      // console.log("Create device: ", response1.data);
+      // console.log("Get Device: ", response2?.data?.id?.id);
+      await axios
+        .post(
+          `https://demo.thingsboard.io:443/api/customer/public/device/${deviceID}`,
           "",
           {
             headers: {
@@ -49,24 +83,26 @@ export default new (class DeviceController {
               "Content-Type": "application/x-www-form-urlencoded",
             },
           }
-        );
-        console.log("Make Public: ", response3.data);
+        )
+        .then(data => console.log('Device Published!'))
 
-        const newDevice = await new DeviceModel({
-          thingsboard_JWT: process.env.JWT_TOKEN,
-          name: await req.body.nameDevice,
-          enityID: await response2?.data?.id?.id,
-          status: false,
-        });
-        //save device
-        const device = await newDevice.save();
-        res.status(200).json("Success");
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    }else{
-      res.status(500).json("You have not type device name")  
+      DeviceModel.create({
+        thingsboard_JWT: process.env.JWT_TOKEN,
+        email: req.body.email,
+        thingsboard_name: deviceName,
+        name: req.body.nameDevice,
+        enityID: deviceID,
+        accessToken: accessToken,
+        status: false,
+        isAirConditioner: req.body.isAC,
+      })
+        .then((data) => {
+          res.status(201).send(data)
+        })
+        .catch((err) => res.status(500).json("Server crashed!"))
     }
-
+    catch (err) {
+      return
+    }
   };
 })();

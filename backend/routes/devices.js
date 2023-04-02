@@ -3,7 +3,8 @@ import express from "express"
 
 var deviceRouter = express.Router()
 
-deviceRouter.route('/').get(DeviceController.testing)
 deviceRouter.route('/add').post(DeviceController.adding)
+deviceRouter.route('/airconditioners').get(DeviceController.airconditioners)
+deviceRouter.route('/humidifiers').get(DeviceController.humidifiers)
 
 export default deviceRouter

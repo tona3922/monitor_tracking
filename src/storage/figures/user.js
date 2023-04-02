@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-// import { useNavigate } from "react-router-dom";
 
 const initialState = {
     user: {
@@ -56,17 +55,10 @@ export const userSlice = createSlice({
 export const { loginSuccess, loginFailure, registerSuccess, registerFailure, logoutHome } = userSlice.actions
 
 export const login = (info) => async dispatch => {
-    // const navigate = useNavigate()
     await axios
         .post("http://localhost:8080/account/login", info)
-        // .then((req) => {
-        //     dispatch(loginSuccess(info))
-        //     return 200
-        // })
-        // .catch((err) => { return 500 });
         .then((res) => {
             dispatch(loginSuccess(res.data))
-            // navigate("/")
         })
         .catch((err) => dispatch(loginFailure()))
 

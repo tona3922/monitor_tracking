@@ -2,6 +2,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import userReducer from './figures/user.js'
+import deviceReducer from './figures/device.js'
 
 const persistConfig = {
     key: 'root',
@@ -9,7 +10,8 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-    user: userReducer
+    user: userReducer,
+    device: deviceReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers)

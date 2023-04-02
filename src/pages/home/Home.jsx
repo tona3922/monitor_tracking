@@ -22,14 +22,14 @@ const Home = () => {
     <div className="home">
       <Sidebar isOpen={showSidebar} setIsOpen={setShowSideBar} />
       <div className="main-section">
-        <Navbar isOpen={showSidebar} setIsOpen={setShowSideBar} />
+        <Navbar isOpen={showSidebar} setIsOpen={setShowSideBar} title={"Dashboard"} />
         <div className="homeContainer">
           {/* <WareHouseTab /> */}
           <div className="temp--humid">
             <Equalizer switchTab={switchTab} />
             <Chart
               title="Sensor Value Collection at Warehouse"
-              // getTab={getTab}
+            // getTab={getTab}
             />
           </div>
           {/* <Grid container alignItems="flex-end" justifyContent="space-evenly" style={{marginBottom: '10px'}}>
