@@ -55,8 +55,8 @@ export default function App() {
             </Route>
             <Route path="/nav2" element={<Home />} />
             <Route path="/device/*" >
-              <Route path="air-conditioner" element={<Devices type="AC" />} />
-              <Route path="humidifier" element={<Devices type="HM" />} />
+              <Route path="air-conditioner/*" element={<Devices type="AC" />} />
+              <Route path="humidifier/*" element={<Devices type="HM" />} />
             </Route>
             <Route path="/logout" element={
               < Logout />

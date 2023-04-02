@@ -8,70 +8,8 @@ import DeviceCard from "../card/device-card";
 
 import { useSelector, useDispatch } from 'react-redux'
 import { addDevice, loadDevice, selectAC, selectHM } from "../../storage/figures/device";
-// import mqtt as
-
-// let deviceData = {
-//     AC: [
-//         {
-//             id: 1,
-//             label: "Air Condition 1",
-//             "icon-off": "air.svg",
-//             "icon-on": "air-on.svg",
-//             status: false,
-//         },
-//         {
-//             id: 3,
-//             label: "Air Condition 2",
-//             "icon-off": "air.svg",
-//             "icon-on": "air-on.svg",
-//             status: false,
-//         },
-//         {
-//             id: 5,
-//             label: "Air Condition 3",
-//             "icon-off": "air.svg",
-//             "icon-on": "air-on.svg",
-//             status: false,
-//         },
-//     ],
 
 
-//     HM: [
-//         {
-//             id: 6,
-//             label: "Humidifier 3",
-//             "icon-off": "humidifier.svg",
-//             "icon-on": "humid-on.svg",
-//             status: false,
-//         },
-
-
-//         {
-//             id: 6,
-//             label: "Humidifier 3",
-//             "icon-off": "humidifier.svg",
-//             "icon-on": "humid-on.svg",
-//             status: false,
-//         },
-
-
-//         {
-//             id: 6,
-//             label: "Humidifier 3",
-//             "icon-off": "humidifier.svg",
-//             "icon-on": "humid-on.svg",
-//             status: false,
-//         },
-//     ]
-// }
-
-// const lightAndFanState = [
-//     { name: "Light 1", img: "light.svg", uptime: 3, level: 60 },
-//     { name: "Light 2", img: "light.svg", uptime: 3, level: 60 },
-//     { name: "Light 3", img: "light.svg", uptime: 3, level: 60 },
-//     { name: "Fan 1", img: "fan.svg", uptime: 3, level: 60 },
-//     { name: "Fan 2", img: "fan.svg", uptime: 3, level: 60 },
-// ]
 
 const AllDeviceOf = (props) => {
     // const [status, setStatus] = useState(false)
@@ -105,6 +43,10 @@ const AllDeviceOf = (props) => {
                     )
                 }
             </Grid>
+            <div className="addButton">
+                <div className="symbol">+</div>
+                <div className="text-sign">ADD NEW DEVICE</div>
+            </div>
         </div>
     );
 };
