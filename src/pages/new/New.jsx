@@ -194,6 +194,7 @@ const Register = () => {
     fullname: "",
     email: "",
     password: "",
+    reEnterPassword: "",
     phone: "",
   })
   const [errors, setErrors] = useState(info) 
@@ -222,12 +223,16 @@ const Register = () => {
         errors[key] = 'This field cannot be empty';
       }
     }    
-    console.log(errors)
     // check valid email
-    if (errors.email === null && !isValidEmail(trimmedInfo.email)) {
+    if (!errors.email && !isValidEmail(trimmedInfo.email)) {
       errors.email = 'Invalid email'
     }
+    // check password and the re-entered one
+    if (!errors.reEnterPassword && trimmedInfo.reEnterPassword !== trimmedInfo.password) {
+      errors.reEnterPassword = "Password doesn't match"
+    }
     if (Object.keys(errors).length === 0) {
+      delete trimmedInfo.reEnterPassword
       dispatcher(register(trimmedInfo))
       navigate('/users/new')
     } else {
@@ -302,6 +307,22 @@ const Register = () => {
       />
     </StyledBox> 
     <div style={{width: '90%'}}><StyledFormHelperText>{errors.password}</StyledFormHelperText></div>
+
+    <StyledBox>
+      <IconButton aria-label="re-enter-password">
+        <KeyIcon sx={{ color: "white" }} />
+      </IconButton>
+      <StyledDivider orientation="vertical" flexItem/>
+      <StyledInputBase 
+        type="password" 
+        placeholder="Confirm password"
+        name="reEnterPassword"
+        value={info.reEnterPassword}
+        onChange={handleChange}
+        error={!!errors.reEnterPassword}
+      />
+    </StyledBox> 
+    <div style={{width: '90%'}}><StyledFormHelperText>{errors.reEnterPassword}</StyledFormHelperText></div>
 
     <StyledBox>
       <IconButton aria-label="phone">
