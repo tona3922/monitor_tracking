@@ -19,8 +19,6 @@ const DeviceCard = (props) => {
     const [isActive, setisActive] = useState(props.status)
     const [isPending, setPending] = useState(false)
 
-    console.log(props)
-
     const handleClick = async (id) => {
         if (isPending) return
         setisActive(!isActive)
@@ -31,7 +29,7 @@ const DeviceCard = (props) => {
     };
 
     return (
-        <div className="devCardwrapper" style={{ 'background-color': isActive && "#1e2124" }}>
+        <div className="devCardwrapper" style={{ 'backgroundColor': isActive && "#1e2124" }}>
             <img src={img[`${props.type}`][isActive ? "true" : "false"]} />
             <div className="devsummary">
                 <div className={isPending && `pointer-events-none`}>

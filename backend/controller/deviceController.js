@@ -3,13 +3,13 @@ import axios from "axios";
 
 export default new (class DeviceController {
   airconditioners = async (req, res) => {
-    await DeviceModel.find({ isAirConditioner: true })
+    await DeviceModel.find({ isAirConditioner: true, email: req.query.email })
       .then((data) => res.json(data))
       .catch((err) => res.json(err));
   }
 
   humidifiers = async (req, res) => {
-    await DeviceModel.find({ isAirConditioner: false })
+    await DeviceModel.find({ isAirConditioner: false, email: req.query.email })
       .then((data) => res.json(data))
       .catch((err) => res.json(err));
   };

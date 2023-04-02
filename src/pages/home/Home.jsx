@@ -48,7 +48,7 @@ const Home = () => {
             <Devices_Info name="Humidifier" />
           </div>
 
-          <Device />
+          {/* <Device /> */}
         </div>
       </div>
     </div >

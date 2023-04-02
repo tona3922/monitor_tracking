@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Switch from "@mui/material/Switch";
-import { styled } from "@mui/material/styles";
-import "./device.scss";
-import { Grid } from "@mui/material";
-import DeviceCard from "../card/device-card";
+import { useState, useEffect } from "react"
+import "./device.scss"
+import { Grid } from "@mui/material"
+import DeviceCard from "../card/device-card"
+import { Link } from "react-router-dom"
 
+import { Routes, Route } from "react-router-dom"
+import { selectUser } from "../../storage/figures/user"
 import { useSelector, useDispatch } from 'react-redux'
-import { addDevice, loadDevice, selectAC, selectHM } from "../../storage/figures/device";
+import { loadDevice, selectAC, selectHM } from "../../storage/figures/device"
+import AddDeviceForm from "../pop-up/addDevice"
+import AddDeviceResult from "../pop-up/addDeviceResult"
 
 
 
@@ -15,10 +17,11 @@ const AllDeviceOf = (props) => {
     // const [status, setStatus] = useState(false)
     const dispatch = useDispatch()
     const deviceData = useSelector(props.type === 'AC' ? selectAC : selectHM)
+    const user = useSelector(selectUser)
 
     useEffect(() => {
         const load = async () => {
-            await dispatch(loadDevice(props.type === 'AC' ? true : false))
+            await dispatch(loadDevice(props.type === 'AC' ? true : false, user.email))
         }
         const intervalId = setInterval(() => {
             load()
@@ -30,24 +33,34 @@ const AllDeviceOf = (props) => {
 
 
     return (
-        <div className="m-10">
-            <Grid container spacing={3} direction="row"
-                alignItems="stretch" columns={{ xs: 4, sm: 8, md: 12 }}
+        <>
+            <div className="m-10">
+                <Grid container spacing={3} direction="row"
+                    alignItems="stretch" columns={{ xs: 4, sm: 8, md: 12 }}
 
-            >
-                {
-                    deviceData.map((device, index) =>
-                        <Grid item xs={4} sm={4} md={3} key={index}>
-                            <DeviceCard type={props.type} {...device} />
-                        </Grid>
-                    )
-                }
-            </Grid>
-            <div className="addButton">
-                <div className="symbol">+</div>
-                <div className="text-sign">ADD NEW DEVICE</div>
+                >
+                    {
+                        deviceData.map((device, index) =>
+                            <Grid item xs={4} sm={4} md={3} key={index}>
+                                <DeviceCard type={props.type} {...device} />
+                            </Grid>
+                        )
+                    }
+                </Grid>
+                <Link to="./add" >
+                    <div className="addButton">
+                        <div className="symbol">+</div>
+                        <div className="text-sign">ADD NEW DEVICE</div>
+                    </div>
+                </Link>
+
+
             </div>
-        </div>
+            <Routes>
+                <Route path="/add/*" element={<AddDeviceForm type={props.type} />} />
+                <Route path="/addResult/*" element={<AddDeviceResult />} />
+            </Routes>
+        </>
     );
 };
 
