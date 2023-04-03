@@ -35,6 +35,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "tbsIOT": "cd ./thingsboard_services && py thingsboard-connect--randomdata.py",
+    "server": "cd ./backend && npm start",
+    "run-all": "start yarn start && start npm run server && start npm run tbsIOT",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
