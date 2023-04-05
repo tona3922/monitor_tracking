@@ -4,30 +4,30 @@ import { useState } from "react";
 import axios from "axios";
 // import "./login.scss";
 import { styled } from "@mui/material/styles";
-import { useSelector, useDispatch } from 'react-redux'
-import { login, selectUser } from "../../storage/figures/user";
+import { useSelector, useDispatch } from "react-redux";
+import { readData, login, selectUser } from "../../storage/figures/user";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import { Typography, Button, FormHelperText } from "@mui/material";
-import EmailIcon from '@mui/icons-material/Email';
-import KeyIcon from '@mui/icons-material/Key';
+import EmailIcon from "@mui/icons-material/Email";
+import KeyIcon from "@mui/icons-material/Key";
 
 const StyledBox = styled(Box)({
   display: "flex",
   alignItems: "center",
   border: "4px solid white",
   borderRadius: "15px",
-  marginTop: '20px',
-  width: '100%',
+  marginTop: "20px",
+  width: "100%",
   transition: "opacity 0.2s",
   "&:focus-within": {
     opacity: 1,
   },
   "&:not(:focus-within)": {
     opacity: 0.4,
-  },  
+  },
 });
 
 const StyledDivider = styled(Divider)({
@@ -40,92 +40,20 @@ const StyledDivider = styled(Divider)({
 const StyledInputBase = styled(InputBase)({
   color: "white",
   flex: 1,
-  fontWeight: 'bold',
+  fontWeight: "bold",
 });
 
 const StyledFormHelperText = styled(FormHelperText)({
-  float: 'left', 
-  color: 'hotpink'
+  float: "left",
+  color: "hotpink",
 });
-
-const Login = () => {
-
-  const [info, setInfo] = useState({
-    email: "",
-    password: "",
-  });
-
-  const user = useSelector(selectUser);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleChangeUserName = (e) => {
-    setInfo((prev) => {
-      return {
-        ...prev,
-        email: e.target.value,
-      };
-    });
-  };
-
-  const handleChangePassword = (e) => {
-    setInfo((prev) => {
-      return {
-        ...prev,
-        password: e.target.value,
-      };
-    });
-  };
-  const _handleKeyDown = async (e) => {
-    if (e.key === "Enter") {
-      // await axios
-      //   .post("http://localhost:8080/account/login", info)
-      //   .then((req) => navigate("/"))
-      //   .catch((err) => console.log("Wrong Account/Password"));
-      // e.preventDefault() 
-      dispatch(login(info))
-      navigate('/')
-    }
-  };
-  return (
-    <div className="mysite">
-      <div className="form">
-        <div className="title">Log in</div>
-        <div className="info">
-          <div className="input">
-            <div className="input_title">Email/Username</div>
-            <input
-              type="text"
-              value={info.username}
-              onChange={handleChangeUserName}
-            />
-          </div>
-          <div className="input">
-            <div className="input_title">Password</div>
-            <input
-              type="password"
-              value={info.password}
-              onChange={handleChangePassword}
-              onKeyDown={_handleKeyDown}
-            />
-          </div>
-        </div>
-        {user.login == -1 && <span>Password/Username incorrect, Try again !!!</span>}
-        <div className="link">
-          Do not have an account : <Link to="/users/new">Sign Up</Link>
-        </div>
-      </div>     
-    </div>
-  );
-};
 
 const Login1 = () => {
   const [info, setInfo] = useState({
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState(info) 
+  const [errors, setErrors] = useState(info);
 
   const user = useSelector(selectUser);
 
@@ -133,123 +61,146 @@ const Login1 = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const {name, value} = e.target
-    setInfo({...info, [name]: value})
+    const { name, value } = e.target;
+    setInfo({ ...info, [name]: value });
     if (errors[name]) {
-      setErrors({...errors, [name]: ""})
-    }    
-  }
+      setErrors({ ...errors, [name]: "" });
+    }
+  };
   const _handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      handleSubmit()
+      handleSubmit();
     }
   };
   const handleSubmit = async () => {
-      // await axios
-      //   .post("http://localhost:8080/account/login", info)
-      //   .then((req) => navigate("/"))
-      //   .catch((err) => console.log("Wrong Account/Password"));
-      // e.preventDefault() 
+    // await axios
+    //   .post("http://localhost:8080/account/login", info)
+    //   .then((req) => navigate("/"))
+    //   .catch((err) => console.log("Wrong Account/Password"));
+    // e.preventDefault()
     // trim space input
-    const trimmedInfo = Object.fromEntries(Object.entries(info).map(([key, value]) => [key, value.trim()]))
-    const errors = {}
+    const trimmedInfo = Object.fromEntries(
+      Object.entries(info).map(([key, value]) => [key, value.trim()])
+    );
+    const errors = {};
     // check empty input
     for (const [key, value] of Object.entries(trimmedInfo)) {
-      if (value === '') {
-        errors[key] = 'This field cannot be empty';
+      if (value === "") {
+        errors[key] = "This field cannot be empty";
       }
-    }          
+    }
     if (Object.keys(errors).length === 0) {
-      dispatch(login(info))
-      navigate('/') 
+      dispatch(login(info));
+      navigate("/");
     } else {
-      setErrors(errors)
-    }    
-  }
+      setErrors(errors);
+    }
+  };
 
   return (
-  <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', color: 'white'}}>
-    <form style={{display:'flex', flexDirection: 'column', alignItems: 'center', width: '30%', minWidth: '300px'}}>
-    <div style={{marginTop: '15vh', marginBottom: '40px'}}>
-    <Typography variant="h4">
-      Login
-    </Typography>
-    </div>      
-    <StyledBox>
-      <IconButton aria-label="email">
-        <EmailIcon sx={{ color: "white" }} />
-      </IconButton>
-      <StyledDivider orientation="vertical" flexItem/>
-      <StyledInputBase 
-        placeholder="Email"
-        name="email"
-        value={info.email}
-        onChange={handleChange}        
-        error={!!errors.email}
-      />
-    </StyledBox> 
-    <div style={{width: '90%'}}><StyledFormHelperText>{errors.email}</StyledFormHelperText></div>
-  
-    <StyledBox>
-      <IconButton aria-label="password">
-        <KeyIcon sx={{ color: "white" }} />
-      </IconButton>
-      <StyledDivider orientation="vertical" flexItem/>
-      <StyledInputBase 
-        type="password" 
-        placeholder="Password"
-        name="password"
-        value={info.password}
-        onChange={handleChange}
-        onKeyDown={_handleKeyDown}        
-        error={!!errors.password}
-      />
-    </StyledBox> 
-    <div style={{width: '90%'}}><StyledFormHelperText>{errors.password}</StyledFormHelperText></div>
-    <div style={{width: '100%'}}>
-    <Link 
-      to="/forgot-password" 
-      style = {{
-        fontSize: "0.8rem",
-        color: "#1A7FC1",
-        float: "right",
-        marginTop: "8px",
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        color: "white",
       }}
     >
-      Forgot password?
-    </Link>    
-    </div>
-    {user.login === -1 && <div style={{textAlign: 'center', color: 'hotpink'}}>Incorrect Username/Password, Try again !!!</div>}    
-    <div style={{margin: '20px', width: '100%'}}>
-      <Button 
-        variant="contained" 
+      <form
         style={{
-          textTransform: 'none', 
-          width: '90%',
-          display: 'block',
-          margin: 'auto',
-          fontWeight: 'bold',
-          borderRadius: "15px",
-        }}
-        onClick={handleSubmit}
-        >
-          Log in
-      </Button>
-    </div>
-    <div>
-      Don't have an account?<span> </span>
-      <Link 
-        to="/users/register" 
-        style = {{
-          color: "#1A7FC1",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "30%",
+          minWidth: "300px",
         }}
       >
-      Sign up
-      </Link>         
-    </div>    
-    </form> 
-  </div>
-  )
-}
+        <div style={{ marginTop: "15vh", marginBottom: "40px" }}>
+          <Typography variant="h4">Login</Typography>
+        </div>
+        <StyledBox>
+          <IconButton aria-label="email">
+            <EmailIcon sx={{ color: "white" }} />
+          </IconButton>
+          <StyledDivider orientation="vertical" flexItem />
+          <StyledInputBase
+            placeholder="Email"
+            name="email"
+            value={info.email}
+            onChange={handleChange}
+            error={!!errors.email}
+          />
+        </StyledBox>
+        <div style={{ width: "90%" }}>
+          <StyledFormHelperText>{errors.email}</StyledFormHelperText>
+        </div>
 
-export default Login1
+        <StyledBox>
+          <IconButton aria-label="password">
+            <KeyIcon sx={{ color: "white" }} />
+          </IconButton>
+          <StyledDivider orientation="vertical" flexItem />
+          <StyledInputBase
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={info.password}
+            onChange={handleChange}
+            onKeyDown={_handleKeyDown}
+            error={!!errors.password}
+          />
+        </StyledBox>
+        <div style={{ width: "90%" }}>
+          <StyledFormHelperText>{errors.password}</StyledFormHelperText>
+        </div>
+        <div style={{ width: "100%" }}>
+          <Link
+            to="/forgot-password"
+            style={{
+              fontSize: "0.8rem",
+              color: "#1A7FC1",
+              float: "right",
+              marginTop: "8px",
+            }}
+          >
+            Forgot password?
+          </Link>
+        </div>
+        {user.login === -1 && (
+          <div style={{ textAlign: "center", color: "hotpink" }}>
+            Incorrect Username/Password, Try again !!!
+          </div>
+        )}
+        <div style={{ margin: "20px", width: "100%" }}>
+          <Button
+            variant="contained"
+            style={{
+              textTransform: "none",
+              width: "90%",
+              display: "block",
+              margin: "auto",
+              fontWeight: "bold",
+              borderRadius: "15px",
+            }}
+            onClick={handleSubmit}
+          >
+            Log in
+          </Button>
+        </div>
+        <div>
+          Don't have an account?<span> </span>
+          <Link
+            to="/users/register"
+            style={{
+              color: "#1A7FC1",
+            }}
+          >
+            Sign up
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Login1;

@@ -11,19 +11,19 @@ import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSyst
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import { useMediaQuery, Drawer, IconButton } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu'
+// import MenuIcon from "@mui/icons-material/Menu";
 import "./sidebar.scss";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
 const SidebarContent = () => {
-  const [activeTab, setActiveTab] = useState(true);
+  // const [activeTab, setActiveTab] = useState(true);
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+  // const handleTabClick = (tab) => {
+  //   setActiveTab(tab);
+  // };
   // console.log(activeTab);
 
   return (
@@ -129,7 +129,7 @@ const SidebarContent = () => {
           </NavLink>
           <p className="title">USER</p>
           <NavLink
-            to="/user"
+            to="/profile"
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "active" : "navlink"
             }
@@ -153,7 +153,7 @@ const SidebarContent = () => {
 };
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
-  const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md
+  const isSmallScreen = useMediaQuery("(max-width: 960px)"); // md
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -170,7 +170,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       )}
     </div>
   );
-
-}
+};
 
 export default Sidebar;

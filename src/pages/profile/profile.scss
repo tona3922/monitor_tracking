@@ -1,0 +1,59 @@
+.profile {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  .btnedit {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+    padding-top: 30px;
+    .edit {
+      background-color: rgb(255, 64, 0);
+      color: white;
+      width: 100px;
+      height: 40px;
+      font-size: 20px;
+      border-radius: 5px;
+    }
+    .editsave {
+      background-color: green;
+      color: white;
+      width: 100px;
+      height: 40px;
+      font-size: 20px;
+      border-radius: 5px;
+    }
+  }
+  .form {
+    display: flex;
+    padding-top: 20px;
+    // align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 80px;
+    align-items: center;
+    .image {
+      img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        border: 0.8px solid black;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .detail {
+        display: flex;
+        flex-direction: column;
+        .title {
+          font-size: 20px;
+        }
+        .rendertitle {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
