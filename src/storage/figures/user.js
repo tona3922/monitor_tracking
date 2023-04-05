@@ -77,7 +77,6 @@ export const login = (info) => async (dispatch) => {
     .post("http://localhost:8080/account/login", info)
     .then((res) => {
       dispatch(loginSuccess(res.data));
-      // dispatch(getData(res.data));
     })
     .catch((err) => dispatch(loginFailure()));
 };
@@ -87,7 +86,20 @@ export const register = (info) => async (dispatch) => {
     .post("http://localhost:8080/account/register", info)
     .then((res) => {
       dispatch(registerSuccess(res.data));
-      // dispatch(getData(res.data));
+    });
+};
+export const update = (info) => async (dispatch) => {
+  await axios
+    .post("http://localhost:8080/account/profile", info)
+    .then((res) => {
+      dispatch(editData(res.data));
+    });
+};
+export const updatebyid = (info) => async (dispatch) => {
+  await axios
+    .post("http://localhost:8080/account/profile", info)
+    .then((res) => {
+      dispatch(editData(res.data));
     });
 };
 

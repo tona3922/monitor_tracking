@@ -4,7 +4,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import avatar from "../../image/avatar.jpg";
 import { useSelector, useDispatch } from "react-redux";
-import { editData, selectUser } from "../../storage/figures/user";
+import { updatebyid, update, selectUser } from "../../storage/figures/user";
 export const Profile = () => {
   const [showSidebar, setShowSideBar] = useState();
   const [btn, setBtn] = useState("Edit");
@@ -16,8 +16,9 @@ export const Profile = () => {
     } else {
       setBtn("Edit");
       setEdit("edit");
+      console.log(user);
+      dispatch(updatebyid(user));
     }
-    dispatch(editData(user));
   };
   const [user, setUser] = useState(useSelector(selectUser));
   const dispatch = useDispatch();
