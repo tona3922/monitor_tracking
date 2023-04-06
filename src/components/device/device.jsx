@@ -102,22 +102,34 @@ let deviceData = [
 ];
 
 const Device = () => {
-  // const [status, setStatus] = useState(false)
   const [list, setList] = useState(deviceData);
   const [flag, setFlag] = useState(false);
-  // console.log(status)
+  console.log("list1: ",list[0].status)
+  console.log("flag ",flag)
 
-  const handleSwitch = (event) => {
-    setFlag(event.target.checked);
-  };
-
-  const updateDevice = (id) => {
-    return list.map((item) => {
-      if (item.id === id) {
-        return { ...item, status: !item.status };
-      } else return item;
-    });
-  };
+  const automaticMode = async () => {
+    const requestData = {
+      method: "automatic",
+      params: flag ? "inactive" : "active",
+    };
+    console.log(requestData);
+    const ENTITY_ID = "36c1d630-c489-11ed-9b15-dd2dac50548f"
+    const URL = `https://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENTITY_ID}/SHARED_SCOPE`
+    try {
+        await axios.post(URL, requestData,{
+        headers:{
+          'X-Authorization': process.env.REACT_APP_JWT_TOKEN,
+          'Content-Type' : 'application/json'
+        }
+      }).then((response) =>{
+        console.log(response)
+      }).catch((error) => {
+        console.log(error)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
   
 
 
@@ -144,16 +156,25 @@ const Device = () => {
       console.log(err)
     }
   };
+  const handleSwitch = (event) => {
+    setFlag(event.target.checked);
+  };
+
+  const updateDevice = (id) => {
+    return list.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: !item.status };
+      } else return item;
+    });
+  };
 
   const handleClick = (id) => {
     setList(updateDevice(id));
     postMethodDevice(id);
-    // setStatus(item => !item)
   };
-
-  // useEffect(() => {
-  //   console.log(list);
-  // }, [list]);
+  const handleAutoUpdate = () =>{
+    setFlag(item => !item)
+  }
 
   return (
     <div className="mx-[25px]">
@@ -167,7 +188,7 @@ const Device = () => {
               <p className="text-white-primary text-[12px] mr-[5px]">
                 AUTO MODE
               </p>
-              <IOSSwitch defaultChecked={false} />
+              <IOSSwitch defaultChecked={flag} onChange={handleSwitch}/>
             </div>
           </div>
           <div className="pl-[10px] flex-initial w-[820px] grid grid-rows-2 grid-flow-col gap-1">
@@ -195,7 +216,7 @@ const Device = () => {
                   <div className="flex flex-col items-end p-[20px]">
                     <IOSSwitch
                       defaultChecked={item.status}
-                      onChange={handleSwitch}
+                      // onChange={handleSwitch}
                       onClick={() => handleClick(item.id)}
                     />
                     <div className="text-white-primary flex flex-col items-end mt-[20px]">
