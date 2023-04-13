@@ -1,0 +1,33 @@
+.devCardwrapper {
+    // min-width: 275px;
+    // width: 100%;
+    // max-width: 500px;
+    // align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    background-color: #424549;
+    border-radius: 20px;
+    padding: 10px;
+    height: 100%;
+    // gap: 50px;
+
+    img {
+        margin-right: auto;
+        width: 75px;
+    }
+    .devsummary {
+        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 300px;
+        .dev-name {
+            margin-top: 15px;
+            color: white;
+            font-weight: bold;
+        }
+        .chrono-active {
+            color: #aeaeae;
+        }
+    }
+}

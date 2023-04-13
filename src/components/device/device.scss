@@ -3,3 +3,41 @@
     box-shadow: -2px 3px 3px 0px rgba(0,0,0,0.5);
 }
 
+.addButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    background-color: #424549;
+    // padding: 20px 0px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    transition: 0.35s;
+    .symbol {
+        aspect-ratio: 1;
+        height: 50px;
+        // margin: 20px;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 2rem;
+        border-radius: 40px;
+    }
+    .text-sign {
+        // visibility: hidden;
+        width: 0;
+        transition: width  display .35s ease-in-out;
+        display: none;
+    }
+    &:hover {
+        filter: drop-shadow(0px 0px 5px #fff);
+        .text-sign {
+            width: fit-content;
+            display: flex;
+            color: white;
+            margin-right: 20px;
+        }
+    }
+}

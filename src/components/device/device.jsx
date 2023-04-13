@@ -3,6 +3,7 @@ import axios from "axios";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import "./device.scss";
+import { Grid } from "@mui/material";
 // import mqtt as
 
 const IOSSwitch = styled((props) => (
@@ -101,59 +102,76 @@ let deviceData = [
   },
 ];
 
+const lightAndFanState = [
+  {name: "Light 1", img: "light.svg", uptime: 3, level: 60},
+  {name: "Light 2", img: "light.svg", uptime: 3, level: 60},
+  {name: "Light 3", img: "light.svg", uptime: 3, level: 60},
+  {name: "Fan 1", img: "fan.svg", uptime: 3, level: 60},
+  {name: "Fan 2", img: "fan.svg", uptime: 3, level: 60},
+]
+
 const Device = () => {
   const [list, setList] = useState(deviceData);
   const [flag, setFlag] = useState(false);
-  console.log("list1: ",list[0].status)
-  console.log("flag ",flag)
+  const [lightAndFan, setLightAndFan] = useState(lightAndFanState)
 
-  const automaticMode = async () => {
+  const autoMode = async () => {
     const requestData = {
-      method: "automatic",
+      method: "autoMode",
       params: flag ? "inactive" : "active",
     };
     console.log(requestData);
-    const ENTITY_ID = "36c1d630-c489-11ed-9b15-dd2dac50548f"
-    const URL = `https://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENTITY_ID}/SHARED_SCOPE`
+    const ENTITY_ID = "2c687400-c489-11ed-9b15-dd2dac50548f";
+    const URL = `https://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENTITY_ID}/SHARED_SCOPE`;
     try {
-        await axios.post(URL, requestData,{
-        headers:{
-          'X-Authorization': process.env.REACT_APP_JWT_TOKEN,
-          'Content-Type' : 'application/json'
-        }
-      }).then((response) =>{
-        console.log(response)
-      }).catch((error) => {
-        console.log(error)
-      })
+      await axios
+        .post(URL, requestData, {
+          headers: {
+            "X-Authorization": process.env.REACT_APP_JWT_TOKEN,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-  
+  };
 
+  const handleAutoMode = () => {
+    autoMode();
+    setFlag((item) => !item);
+  };
 
   const postMethodDevice = async (id) => {
     const requestData = {
       method: `setFan_${id}`,
-      params: list.find(item => item.id === id).status  === true ? "Off" : "On",
+      params:
+        list.find((item) => item.id === id).status === true ? "Off" : "On",
     };
     console.log(requestData);
-    const ENTITY_ID = "36c1d630-c489-11ed-9b15-dd2dac50548f"
-    const URL = `https://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENTITY_ID}/SHARED_SCOPE`
+    const ENTITY_ID = "2c687400-c489-11ed-9b15-dd2dac50548f";
+    const URL = `https://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENTITY_ID}/SHARED_SCOPE`;
     try {
-        await axios.post(URL, requestData,{
-        headers:{
-          'X-Authorization': process.env.REACT_APP_JWT_TOKEN,
-          'Content-Type' : 'application/json'
-        }
-      }).then((response) =>{
-        console.log(response)
-      }).catch((error) => {
-        console.log(error)
-      })
+      await axios
+        .post(URL, requestData, {
+          headers: {
+            "X-Authorization": process.env.REACT_APP_JWT_TOKEN,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
   const handleSwitch = (event) => {
@@ -172,12 +190,97 @@ const Device = () => {
     setList(updateDevice(id));
     postMethodDevice(id);
   };
-  const handleAutoUpdate = () =>{
-    setFlag(item => !item)
-  }
 
   return (
-    <div className="mx-[25px]">
+    <>
+    <Grid container>
+      <Grid item xs={12} lg={8}>
+      <div className="ml-5 mr-5 mb-5">
+          <div className="flex items-end mb-[10px] justify-between">
+            <h1 className="font-semibold text-[28px] text-white-primary">
+              My Devices
+            </h1>
+            <div className="flex items-center mx-[25px]">
+              <p className="text-white-primary text-[12px] mr-[5px]">
+                AUTO MODE
+              </p>
+              <IOSSwitch defaultChecked={false} onClick={handleAutoMode}/>
+            </div>
+          </div>
+          <Grid container alignItems="stretch">
+            {list.map((device) => (
+              <Grid item xs={12} sm={6} md={4} key={device.id} style={{ marginTop: '10px' }}>
+              <div
+                className={
+                  `rounded-[20px] shadow ml-[10px] flex justify-between px-[10px] h-[100%]
+                  ${device.status
+                    ? "bg-status-on"
+                    : "bg-status-off"}`
+                }
+              >
+                {/* <div className="flex justify-between px-[10px] pt-[10px]"> */}
+                  {device.status ? (
+                    <img
+                      src={device["icon-on"]}
+                      className="w-[80px] fill-white-primary"
+                    />
+                  ) : (
+                    <img
+                      src={device["icon-off"]}
+                      className="w-[80px] fill-white-primary"
+                    />
+                  )}
+                  <div className="flex flex-col items-end p-[20px]">
+                    <IOSSwitch
+                      defaultChecked={device.status}
+                      // onChange={handleSwitch}
+                      onClick={() => handleClick(device.id)}
+                    />
+                    <div className="text-white-primary flex flex-col items-end mt-[20px]">
+                      <p className="text-[17px] font-semibold">{device.label}</p>
+                      <p className="text-[10px] text-[#7A7A7A]">
+                        Active for 3 hours
+                      </p>
+                    </div>
+                  {/* </div> */}
+                </div>
+              </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </Grid>
+      <Grid item xs={12} lg={4}>
+      <div className="ml-5 mr-5 mb-5">
+          <h1 className="font-semibold text-[28px] text-white-primary">
+            Light & Fan
+          </h1>
+          <div className="bg-status-off rounded-[20px]">
+            {lightAndFan.map((device, index) => (
+              <div className="flex items-center p-[15px] justify-between" key={index}>
+              <div className="flex items-center">
+                <img src={device.img} className="w-[30px]" />
+                <div className="flex flex-col items-baseline">
+                  <p className="text-white-primary text-[14px] ml-[20px]">
+                    {device.name}
+                  </p>
+                  <p className="text-[10px] text-[#7A7A7A]">
+                    Active for {device.uptime} hours
+                  </p>
+                </div>
+              </div>
+              <div className="ml-[100px]">
+                <p className="text-white-primary font-semibold text-[13px]">
+                  {device.level}%
+                </p>
+              </div>
+            </div>
+            ))}
+          </div>
+        </div>        
+      </Grid>      
+    </Grid>
+    {/* <div className="mx-[25px]">
       <div className="flex justify-between">
         <div className="">
           <div className="flex items-end mb-[10px] justify-between">
@@ -188,7 +291,7 @@ const Device = () => {
               <p className="text-white-primary text-[12px] mr-[5px]">
                 AUTO MODE
               </p>
-              <IOSSwitch defaultChecked={flag} onChange={handleSwitch}/>
+              <IOSSwitch defaultChecked={flag} onClick={handleAutoMode} />
             </div>
           </div>
           <div className="pl-[10px] flex-initial w-[820px] grid grid-rows-2 grid-flow-col gap-1">
@@ -232,93 +335,16 @@ const Device = () => {
           </div>
         </div>
         <div className="w-1/2">
-          <h1 className="font-semibold text-[28px] text-white-primary">
+          <h1 className="font-semibold text-[28px] text-white-primary mb-[10px]">
             Light & Fan
           </h1>
-          <div className="bg-status-off h-[350px] rounded-[20px]">
+
+          <div className="bg-status-off h-fit rounded-[20px]">
             <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
+              <div className="flex items-start w-[120px]">
                 <img src="light.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Light 1
-                  </p>
-                  <p className="text-[10px] text-[#7A7A7A]">
-                    Active for 3 hours
-                  </p>
-                </div>
-              </div>
-              <div className="ml-[100px]">
-                <p className="text-white-primary font-semibold text-[13px]">
-                  60%
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
-                <img src="light.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Light 2
-                  </p>
-                  <p className="text-[10px] text-[#7A7A7A]">
-                    Active for 3 hours
-                  </p>
-                </div>
-              </div>
-              <div className="ml-[100px]">
-                <p className="text-white-primary font-semibold text-[13px]">
-                  60%
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
-                <img src="light.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Light 3
-                  </p>
-                  <p className="text-[10px] text-[#7A7A7A]">
-                    Active for 3 hours
-                  </p>
-                </div>
-              </div>
-              <div className="ml-[100px]">
-                <p className="text-white-primary font-semibold text-[13px]">
-                  60%
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
-                <img src="fan.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Fan 1
-                  </p>
-                  <p className="text-[10px] text-[#7A7A7A]">
-                    Active for 3 hours
-                  </p>
-                </div>
-              </div>
-              <div className="ml-[100px]">
-                <p className="text-white-primary font-semibold text-[13px]">
-                  60%
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center p-[15px] justify-between">
-              <div className="flex items-center">
-                <img src="fan.svg" className="w-[30px]" />
-                <div className="flex flex-col items-baseline">
-                  <p className="text-white-primary text-[14px] ml-[20px]">
-                    Fan 2
-                  </p>
+                <div className="flex flex-col">
+                  <p className="text-white-primary text-[14px]">Light 1</p>
                   <p className="text-[10px] text-[#7A7A7A]">
                     Active for 3 hours
                   </p>
@@ -333,7 +359,8 @@ const Device = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
+    </>
   );
 };
 
