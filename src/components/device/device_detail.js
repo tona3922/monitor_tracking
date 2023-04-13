@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadDevice, selectAC, selectHM } from "../../storage/figures/device"
 import AddDeviceForm from "../pop-up/addDevice"
 import AddDeviceResult from "../pop-up/addDeviceResult"
+import DeviceDetail from "./deviceResult"
+
 
 
 
@@ -18,6 +20,8 @@ const AllDeviceOf = (props) => {
     const dispatch = useDispatch()
     const deviceData = useSelector(props.type === 'AC' ? selectAC : selectHM)
     const user = useSelector(selectUser)
+    const [isActive, setIsActive] = useState(false)
+    const [curDv, setCurDv] = useState()
 
     useEffect(() => {
         const load = async () => {
@@ -30,23 +34,35 @@ const AllDeviceOf = (props) => {
         // dispatch(loadDevice())
     }, [])
     // dispatch(loadDevice(true))
+    const handleDevice = (id) => {
+        setIsActive(true)
+        setCurDv(deviceData.find(item => item._id === id))
+        console.log(curDv)
+    }
+    const closeHandle = () => {
+        setIsActive(false)
+    }
 
+    // console.log(curDv)
 
     return (
         <>
             <div className="m-10">
                 <Grid container spacing={3} direction="row"
                     alignItems="stretch" columns={{ xs: 4, sm: 8, md: 12 }}
-
                 >
                     {
                         deviceData.map((device, index) =>
-                            <Grid item xs={4} sm={4} md={3} key={index}>
-                                <DeviceCard type={props.type} {...device} />
+                            <Grid item xs={4} sm={4} md={3} key={index} onClick={() => handleDevice(device._id)}>
+                                <DeviceCard type={props.type} {...device} close={closeHandle} />
                             </Grid>
                         )
                     }
                 </Grid>
+                {
+                    isActive && <DeviceDetail device={curDv} close={closeHandle}/>
+                }
+
                 <Link to="./add" >
                     <div className="addButton">
                         <div className="symbol">+</div>

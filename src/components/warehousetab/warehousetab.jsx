@@ -56,11 +56,7 @@ const WareHouseTab = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  // const increasetab = () => {
-  //   setmoreTab(moreTab + 1);
-  //   tabs.push({ id: moreTab, label: "Stock " + moreTab });
-  //   console.log(tabs);
-  // };
+
   const handleAddDevice = async (e) => {
     e.preventDefault()
     const response = await axios

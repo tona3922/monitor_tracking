@@ -3,17 +3,6 @@ import DevicesPieChart from '../chart/PieChart'
 import './device_general.scss'
 import { Link } from 'react-router-dom'
 
-// const LegendStack = (props) => {
-//     return (
-//         <div className="legend-wrapper">
-//             <div className="device-type">{props.name}</div>
-//             <div className="device-tag-container">
-//                 <DevicesPieChart name={props.name} />
-//                 <LegendStack></LegendStack>
-//             </div>
-//         </div>
-//     )
-// }
 
 const Devices_Info = (props) => {
     return (
