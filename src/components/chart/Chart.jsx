@@ -17,9 +17,7 @@ import {
 import { BouncyLoading } from "../loading/Loading";
 import { CustomTooltip } from "./tooltip";
 
-const Chart = ({ aspect, title, getTab, childToParent }) => {
-	// const [temp, setTemp] = useState([])
-	// const [humid, setHumid] = useState([])
+const Chart = ({ title, currentTab }) => {
 	const [loading, setLoad] = useState(true)
 	const [data, setData] = useState([])
 	const [timeEnd, setTimeEnd] = useState(new Date())
@@ -79,7 +77,8 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
 				loading ?
 					<BouncyLoading text={'Fetching Data!'} />
 					:
-					<div>
+					<>
+						{currentTab === 0 && (
 						<ResponsiveContainer width={'99%'} height={400}>
 							<AreaChart
 								// To get XAxis base
@@ -91,10 +90,6 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
 										<stop offset="0%" stopColor="#ffd6ff" stopOpacity={0.3} />
 										<stop offset="100%" stopColor="#ffd6ff" stopOpacity={0} />
 									</linearGradient>
-									<linearGradient id="humidID" x1="0" y1="0" x2="0" y2="1">
-										<stop offset="0%" stopColor="#bbd0ff" stopOpacity={0.5} />
-										<stop offset="75%" stopColor="#bbd0ff" stopOpacity={0} />
-									</linearGradient>
 								</defs>
 								{/* <CartesianGrid strokeDasharray="3 13" stroke="white" /> */}
 								<XAxis dataKey="ts" axisLine={true} tick={false} />
@@ -105,35 +100,8 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
 									domain={[15, 60]}
 									stroke="white"
 								/>
-								<YAxis
-									yAxisId="right-axis"
-									orientation="right"
-									type="number"
-									tickFormatter={tick => `${tick}%`}
-									domain={[0, 100]}
-									stroke="white"
-								/>
 								<Tooltip wrapperStyle={{ outline: "none" }} content={<CustomTooltip />} />
 								<Legend />
-								{/* {getTab ? ( */}
-								<Area
-									yAxisId="right-axis"
-									type="monotone"
-									// data={humid}
-									dataKey="humidity"
-									name="Humidity"
-									stroke="#bbd0ff"
-									fillOpacity={0.5}
-									fill="url(#humidID)"
-									dot={false}
-									strokewidth={8}
-									isAnimationActive={false}
-									activeDot={{ r: 3 }}
-									style={{
-										filter: `drop-shadow(0px 0px 5px #bbd0ff)`
-									}}
-								/>
-								{/* ) : ( */}
 								<Area
 									yAxisId="left-axis"
 									type="monotone"
@@ -150,10 +118,54 @@ const Chart = ({ aspect, title, getTab, childToParent }) => {
 										filter: `drop-shadow(0px 0px 5px #ffd6ff)`
 									}}
 								/>
-								{/* )} */}
 							</AreaChart>
 						</ResponsiveContainer>
-					</div>
+						)}					
+						{currentTab === 1 && (	
+						<ResponsiveContainer width={'99%'} height={400}>
+							<AreaChart
+								// To get XAxis base
+								data={data}
+								margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+							>
+								<defs>
+									<linearGradient id="humidID" x1="0" y1="0" x2="0" y2="1">
+										<stop offset="0%" stopColor="#bbd0ff" stopOpacity={0.5} />
+										<stop offset="75%" stopColor="#bbd0ff" stopOpacity={0} />
+									</linearGradient>
+								</defs>
+								{/* <CartesianGrid strokeDasharray="3 13" stroke="white" /> */}
+								<XAxis dataKey="ts" axisLine={true} tick={false} />
+								<YAxis
+									yAxisId="left-axis"
+									type="number"
+									tickFormatter={tick => `${tick}%`}
+									domain={[0, 100]}
+									stroke="white"
+								/>
+								<Tooltip wrapperStyle={{ outline: "none" }} content={<CustomTooltip />} />
+								<Legend />
+								<Area
+									yAxisId="left-axis"
+									type="monotone"
+									// data={humid}
+									dataKey="humidity"
+									name="Humidity"
+									stroke="#bbd0ff"
+									fillOpacity={0.5}
+									fill="url(#humidID)"
+									dot={false}
+									strokewidth={8}
+									isAnimationActive={false}
+									activeDot={{ r: 3 }}
+									style={{
+										filter: `drop-shadow(0px 0px 5px #bbd0ff)`
+									}}
+								/>
+							</AreaChart>
+						</ResponsiveContainer>
+						)}
+					</>
 			}
 		</div>
 	);

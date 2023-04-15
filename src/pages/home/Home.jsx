@@ -11,11 +11,10 @@ import { Grid } from "@mui/material";
 import Devices_Info from "../../components/device/device_general";
 
 const Home = () => {
-  const [getTab, setGetTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(0);
   const switchTab = (item) => {
-    setGetTab(item)
+    setCurrentTab(item)
   }
-  console.log(getTab);
   const [showSidebar, setShowSideBar] = useState()
 
   return (
@@ -24,30 +23,17 @@ const Home = () => {
       <div className="main-section">
         <Navbar isOpen={showSidebar} setIsOpen={setShowSideBar} title={"Dashboard"} />
         <div className="homeContainer">
-          {/* <WareHouseTab /> */}
           <div className="temp--humid">
             <Equalizer switchTab={switchTab} />
             <Chart
               title="Sensor Value Collection at Warehouse"
-            // getTab={getTab}
+              currentTab={currentTab}
             />
           </div>
-          {/* <Grid container alignItems="flex-end" justifyContent="space-evenly" style={{marginBottom: '10px'}}>
-            <Grid item md={12} lg={4}>
-              <Equalizer switchTab={switchTab} />
-            </Grid>
-            <Grid item md={12} lg={7}>
-              <Chart
-                title="Sensor Value Collection at Warehouse"
-                getTab={getTab}
-              />              
-            </Grid>             */}
-          {/* </Grid> */}
           <div className="pair">
             <Devices_Info name="Air Conditioner" />
             <Devices_Info name="Humidifier" />
           </div>
-
           {/* <Device /> */}
         </div>
       </div>
