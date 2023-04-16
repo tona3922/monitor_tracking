@@ -1,0 +1,14 @@
+.door-controller-wrapper {
+    width: 100%;
+    .door-controller-container {
+        display: flex;
+        flex-direction: column;
+        border-radius: 30px;
+        background-color: 	#1e2124;
+    }
+    .door-controller-title {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 700;    
+    }
+}

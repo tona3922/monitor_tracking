@@ -7,8 +7,8 @@ import WareHouseTab from "../../components/warehousetab/warehousetab"
 import Device from "../../components/device/device"
 import Equalizer from "../../components/equalizer/equalizer"
 import Navbar from "../../components/navbar/Navbar";
-import { Grid } from "@mui/material";
 import Devices_Info from "../../components/device/device_general";
+import DoorController from "../../components/door-controller/DoorController";
 
 const Home = () => {
   const [currentTab, setCurrentTab] = useState(0);
@@ -35,9 +35,14 @@ const Home = () => {
             <Devices_Info name="Humidifier" />
           </div>
           {/* <Device /> */}
+          <div className="pair">
+            <div className="w-full lg:w-1/2">
+              <DoorController/>
+            </div>
+          </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
