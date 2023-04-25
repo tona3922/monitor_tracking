@@ -64,7 +64,7 @@
         // width: fit-content;
         height: fit-content;
         border-radius: 30px;
-        background-color: 	#424549;
+        background-color: white;
         width: 100%;
         input {
           height: 40px;
@@ -73,7 +73,7 @@
           padding-left: 1.5rem;
           font-size: 1.25rem;
           outline: none;
-          background-color: 	#36393e;
+          background-color: #36393e;
           border-radius: 30px 0px 0px 30px;
           color: white;
           // border-bottom: 0.5px solid grey;
@@ -84,7 +84,7 @@
           margin-right: 35px;
           font-size: 30px;
           cursor: pointer;
-          color: white
+          color: white;
         }
       }
     }
@@ -110,6 +110,7 @@
         .icon {
           font-size: 30px;
           cursor: pointer;
+          color: white;
         }
 
         .avatar {

@@ -99,7 +99,7 @@ const SidebarContent = () => {
             <span>Notifications</span>
           </NavLink>
 
-          <p className="title">SERVICE</p>
+          {/* <p className="title">SERVICE</p>
           <NavLink
             to="/syscheck"
             className={({ isActive, isPending }) =>
@@ -126,7 +126,7 @@ const SidebarContent = () => {
           >
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
-          </NavLink>
+          </NavLink> */}
           <p className="title">USER</p>
           <NavLink
             to="/profile"

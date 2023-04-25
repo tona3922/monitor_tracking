@@ -8,9 +8,7 @@ const List = () => {
     <div className="list flex-initial">
       <Sidebar />
       <div className="listContainer">
-        <div className="spec">
-          <Navbar />
-        </div>
+        <Navbar title="Dashboard" />
         <Datatable />
       </div>
     </div>

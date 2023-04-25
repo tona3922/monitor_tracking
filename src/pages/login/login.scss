@@ -7,13 +7,17 @@
   display: flex;
   //   justify-content: center;
   align-items: center;
-  background-image: url(../../image/mybackgr.jpg);
+  background-image: url(../../image/background.jpg);
   background-size: cover;
   .form {
-    padding-left: 200px;
+    height: fit-content;
+    width: max-content;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 5px;
+    background-color: transparent;
+    backdrop-filter: blur(30px);
+    border-radius: 10px;
     .title {
       text-align: center;
       font-size: 30px;

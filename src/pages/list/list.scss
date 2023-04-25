@@ -1,10 +1,8 @@
 .list {
   display: flex;
   width: 100%;
+  background-color: white;
   .listContainer {
     flex: 6;
-    .spec {
-      background-color: rgb(49 49 64);
-    }
   }
 }

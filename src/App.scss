@@ -1,29 +1,29 @@
 @mixin custom-scroll-bar() {
-    &::-webkit-scrollbar {
-        border-radius: 10px;
-        opacity: 0.5;
-        height: 8px;
-        width: 8px;
-        overflow: overlay;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-        background: #999;
-        border-radius: 10px;
-    }
-  
-    &::-webkit-scrollbar-track {
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.2) !important;
-    }
-    &::-webkit-scrollbar-button {
-        height: 50px;
-    }
+  &::-webkit-scrollbar {
+    border-radius: 10px;
+    opacity: 0.5;
+    height: 8px;
+    width: 8px;
+    overflow: overlay;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+  &::-webkit-scrollbar-button {
+    height: 50px;
+  }
 }
 html {
-    @include custom-scroll-bar();
+  @include custom-scroll-bar();
 }
 body {
-    overflow: overlay;
-    background-color:#282b30;
+  overflow: overlay;
+  //   background-color: #282b30;
 }

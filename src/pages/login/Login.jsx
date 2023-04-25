@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
-import axios from "axios";
 // import "./login.scss";
 import { styled } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import { Typography, Button, FormHelperText } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyIcon from "@mui/icons-material/Key";
+import "./login.scss";
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -21,6 +21,7 @@ const StyledBox = styled(Box)({
   borderRadius: "15px",
   marginTop: "20px",
   width: "100%",
+  backgroundColor: "black",
   transition: "opacity 0.2s",
   "&:focus-within": {
     opacity: 1,
@@ -34,7 +35,7 @@ const StyledDivider = styled(Divider)({
   width: "2px",
   height: "30px",
   margin: "10px",
-  backgroundColor: "white",
+  backgroundColor: "black",
 });
 
 const StyledInputBase = styled(InputBase)({
@@ -103,22 +104,38 @@ const Login1 = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        color: "white",
+        color: "black",
       }}
+      className="mysite"
     >
       <form
         style={{
           display: "flex",
+          marginTop: "200px",
           flexDirection: "column",
           alignItems: "center",
           width: "30%",
           minWidth: "300px",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+          paddingBottom: "30px",
         }}
+        className="form"
       >
-        <div style={{ marginTop: "15vh", marginBottom: "40px" }}>
-          <Typography variant="h4">Login</Typography>
+        <div style={{ marginTop: "20px", marginBottom: "10px" }}>
+          <Typography
+            sx={{
+              height: "50px",
+              fontSize: "35px",
+              fontWeight: "bold",
+              color: "white",
+            }}
+            variant="h4"
+          >
+            Login
+          </Typography>
         </div>
-        <StyledBox>
+        <StyledBox sx={{ borderColor: "black" }}>
           <IconButton aria-label="email">
             <EmailIcon sx={{ color: "white" }} />
           </IconButton>
@@ -135,7 +152,7 @@ const Login1 = () => {
           <StyledFormHelperText>{errors.email}</StyledFormHelperText>
         </div>
 
-        <StyledBox>
+        <StyledBox sx={{ borderColor: "black" }}>
           <IconButton aria-label="password">
             <KeyIcon sx={{ color: "white" }} />
           </IconButton>
@@ -158,7 +175,7 @@ const Login1 = () => {
             to="/forgot-password"
             style={{
               fontSize: "0.8rem",
-              color: "#1A7FC1",
+              color: "white",
               float: "right",
               marginTop: "8px",
             }}
@@ -180,6 +197,7 @@ const Login1 = () => {
               display: "block",
               margin: "auto",
               fontWeight: "bold",
+              fontSize: "20px",
               borderRadius: "15px",
             }}
             onClick={handleSubmit}
@@ -187,12 +205,13 @@ const Login1 = () => {
             Log in
           </Button>
         </div>
-        <div>
+        <div style={{ fontSize: "20px" }}>
           Don't have an account?<span> </span>
           <Link
             to="/users/register"
             style={{
-              color: "#1A7FC1",
+              color: "#fdfffc",
+              fontSize: "20px",
             }}
           >
             Sign up

@@ -1,14 +1,14 @@
 import "./navbar.scss";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+// import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import profileimage from "../../image/profile.jpg";
-import MenuIcon from '@mui/icons-material/Menu'
+import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery, IconButton } from "@mui/material";
 // import Tab from "../tabs/Tab";
 
 const Navbar = ({ isOpen, setIsOpen, title, searchBar }) => {
-  const isSmallScreen = useMediaQuery('(max-width: 960px)'); // md
+  const isSmallScreen = useMediaQuery("(max-width: 960px)"); // md
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -28,12 +28,14 @@ const Navbar = ({ isOpen, setIsOpen, title, searchBar }) => {
           >
             {title}
           </h1>
-
         </div>
         <div className="middle">
           {searchBar && !isSmallScreen && (
             <div className="item">
-              <input placeholder="Search" className="rounded-[10px] px-[10px]" />
+              <input
+                placeholder="Search"
+                className="rounded-[10px] px-[10px]"
+              />
               <SearchIcon className="icon" />
             </div>
           )}

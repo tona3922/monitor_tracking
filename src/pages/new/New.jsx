@@ -16,6 +16,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import PhoneIcon from "@mui/icons-material/Phone";
+// import "./new.scss";
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -121,27 +122,37 @@ const Register = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        color: "white",
+        color: "black",
       }}
+      // className="new"
     >
       <form
         style={{
           display: "flex",
           flexDirection: "column",
+          marginTop: "50px",
           alignItems: "center",
           width: "30%",
           minWidth: "300px",
+          // border: "0.8px solid black",
+          // borderRadius: "10px",
+          // padding: "30px",
         }}
       >
-        <div style={{ marginTop: "8vh", marginBottom: "30px" }}>
+        <div style={{ marginTop: "10px", marginBottom: "30px" }}>
           <Typography variant="h4">Register</Typography>
         </div>
         <StyledBox>
           <IconButton aria-label="username">
-            <AccountCircleIcon sx={{ color: "white" }} />
+            <AccountCircleIcon sx={{ color: "black" }} />
           </IconButton>
-          <StyledDivider orientation="vertical" flexItem />
+          <StyledDivider
+            sx={{ color: "black" }}
+            orientation="vertical"
+            flexItem
+          />
           <StyledInputBase
+            sx={{ color: "black" }}
             placeholder="Username"
             name="username"
             value={info.username}
@@ -154,10 +165,15 @@ const Register = () => {
         </div>
         <StyledBox>
           <IconButton aria-label="fullname">
-            <AccountCircleIcon sx={{ color: "white" }} />
+            <AccountCircleIcon sx={{ color: "black" }} />
           </IconButton>
-          <StyledDivider orientation="vertical" flexItem />
+          <StyledDivider
+            sx={{ color: "black" }}
+            orientation="vertical"
+            flexItem
+          />
           <StyledInputBase
+            sx={{ color: "black" }}
             placeholder="Fullname"
             name="fullname"
             value={info.fullname}
@@ -171,10 +187,15 @@ const Register = () => {
 
         <StyledBox>
           <IconButton aria-label="email">
-            <EmailIcon sx={{ color: "white" }} />
+            <EmailIcon sx={{ color: "black" }} />
           </IconButton>
-          <StyledDivider orientation="vertical" flexItem />
+          <StyledDivider
+            sx={{ color: "black" }}
+            orientation="vertical"
+            flexItem
+          />
           <StyledInputBase
+            sx={{ color: "black" }}
             placeholder="Email"
             name="email"
             value={info.email}
@@ -188,10 +209,15 @@ const Register = () => {
 
         <StyledBox>
           <IconButton aria-label="password">
-            <KeyIcon sx={{ color: "white" }} />
+            <KeyIcon sx={{ color: "black" }} />
           </IconButton>
-          <StyledDivider orientation="vertical" flexItem />
+          <StyledDivider
+            sx={{ color: "black" }}
+            orientation="vertical"
+            flexItem
+          />
           <StyledInputBase
+            sx={{ color: "black" }}
             type="password"
             placeholder="Password"
             name="password"
@@ -206,10 +232,15 @@ const Register = () => {
 
         <StyledBox>
           <IconButton aria-label="re-enter-password">
-            <KeyIcon sx={{ color: "white" }} />
+            <KeyIcon sx={{ color: "black" }} />
           </IconButton>
-          <StyledDivider orientation="vertical" flexItem />
+          <StyledDivider
+            sx={{ color: "black" }}
+            orientation="vertical"
+            flexItem
+          />
           <StyledInputBase
+            sx={{ color: "black" }}
             type="password"
             placeholder="Confirm password"
             name="reEnterPassword"
@@ -224,10 +255,15 @@ const Register = () => {
 
         <StyledBox>
           <IconButton aria-label="phone">
-            <PhoneIcon sx={{ color: "white" }} />
+            <PhoneIcon sx={{ color: "black" }} />
           </IconButton>
-          <StyledDivider orientation="vertical" flexItem />
+          <StyledDivider
+            sx={{ color: "black" }}
+            orientation="vertical"
+            flexItem
+          />
           <StyledInputBase
+            sx={{ color: "black" }}
             placeholder="Phone number"
             name="phone"
             value={info.phone}
