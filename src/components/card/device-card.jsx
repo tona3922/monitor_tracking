@@ -22,7 +22,7 @@ const DeviceCard = (props) => {
   const [isActive, setisActive] = useState(props.status);
   const [isPending, setPending] = useState(false);
 
-  const switchMethod = async (id) => {
+  const switchMethod = async (id) => {  
     const requestData = {
       method:
         "setAC_" +
