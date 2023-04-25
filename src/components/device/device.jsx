@@ -111,7 +111,6 @@ const lightAndFanState = [
 ]
 
 const Device = () => {
-  // const [status, setStatus] = useState(false)
   const [list, setList] = useState(deviceData);
   const [flag, setFlag] = useState(false);
   const [lightAndFan, setLightAndFan] = useState(lightAndFanState)
@@ -148,14 +147,6 @@ const Device = () => {
     setFlag((item) => !item);
   };
 
-  const updateDevice = (id) => {
-    return list.map((item) => {
-      if (item.id === id) {
-        return { ...item, status: !item.status };
-      } else return item;
-    });
-  };
-
   const postMethodDevice = async (id) => {
     const requestData = {
       method: `setFan_${id}`,
@@ -182,6 +173,17 @@ const Device = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+  const handleSwitch = (event) => {
+    setFlag(event.target.checked);
+  };
+
+  const updateDevice = (id) => {
+    return list.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: !item.status };
+      } else return item;
+    });
   };
 
   const handleClick = (id) => {
