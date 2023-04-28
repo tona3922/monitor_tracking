@@ -126,8 +126,8 @@ export default function Equalizer({ switchTab }) {
   // ];
   // console.log(temp[temp.length - 1])
   useEffect(() => {
-    console.log(process.env.REACT_APP_ENITYID)
-    const API_URL = `http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${process.env.REACT_APP_ENITYID}/values/timeseries?keys=temperature,humidity`;
+    const ENITYID_ID = "5fb3b7c0-da91-11ed-a4fc-57550caf43ca"
+    const API_URL = `http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENITYID_ID}/values/timeseries?keys=temperature,humidity`;
     async function fetchData() {
       const response = await axios
         .get(API_URL, {

@@ -24,7 +24,8 @@ const Chart = ({ title, currentTab }) => {
 	const [timeStart, setTimeStart] = useState(new Date(Date.now() - (3600 * 1000 * 2)))
 
 	useEffect(() => {
-		const API_URL = `http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${process.env.REACT_APP_ENITYID}/values/timeseries?keys=temperature,humidity&startTs=${timeStart.getTime().toString()}&endTs=${timeEnd.getTime().toString()}&interval=60000&limit=30`
+		const ENITYID_ID = "5fb3b7c0-da91-11ed-a4fc-57550caf43ca";
+		const API_URL = `http://demo.thingsboard.io/api/plugins/telemetry/DEVICE/${ENITYID_ID}/values/timeseries?keys=temperature,humidity&startTs=${timeStart.getTime().toString()}&endTs=${timeEnd.getTime().toString()}&interval=60000&limit=30`
 		async function fetchData() {
 			const response = await axios
 				.get(API_URL, {
@@ -45,10 +46,11 @@ const Chart = ({ title, currentTab }) => {
 			fetchData().then(data => {
 				// childToParent(data)
 				if (Object.keys(data).length !== 0) {
-					setData(data['temperature'].reverse().map((item, index) => {
+					console.log(data)
+					setData(data['temperature']?.reverse().map((item, index) => {
 						return {
 							temperature: item['value'],
-							humidity: data['humidity'][data['humidity'].length - index - 1]['value'],
+							humidity: data['humidity'][data['humidity']?.length - index - 1]['value'],
 							ts: new Date(item.ts)
 						}
 					})
@@ -121,7 +123,7 @@ const Chart = ({ title, currentTab }) => {
 							</AreaChart>
 						</ResponsiveContainer>
 						)}					
-						{currentTab === 1 && (	
+						{currentTab === 1 && ( 		
 						<ResponsiveContainer width={'99%'} height={400}>
 							<AreaChart
 								// To get XAxis base
