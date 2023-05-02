@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['leakage', 'squeeze', 'tear']
+
+roboflow:
+  workspace: tracking-u78ba
+  project: box-fsrpn
+  version: 16
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/tracking-u78ba/box-fsrpn/dataset/16
