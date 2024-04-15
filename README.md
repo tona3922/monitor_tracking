@@ -37,9 +37,12 @@ Sau khi đã khởi động dự án, tiến hành thay đổi đường dẫn �
 Dữ liệu sẽ được cập nhật từ thingsboard sang webapp một cách realtime
 
 Để chạy module cameraAI cần thay đổi đường dẫn đến thư mục **yolov8_counting_webcam**
+
 ```bash
    cd yolov8_counting_webcam
    python3 train.py
 ```
+Một số hình ảnh về dự án
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/home.png)
 
 
