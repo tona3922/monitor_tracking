@@ -43,6 +43,17 @@ Dữ liệu sẽ được cập nhật từ thingsboard sang webapp một cách 
    python3 train.py
 ```
 Một số hình ảnh về dự án
+## Login
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/login_page.png)
+## Sign up
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/signup_page.png)
+## Home
 ![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/home.png)
+## Humid and Temperature Monitor
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/humid.png)
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/temp.png)
+## Device and device information
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/listdv.png)
+![alt text](https://github.com/tona3922/monitor_tracking/blob/master/description_images/infodevice.png).
 
 
